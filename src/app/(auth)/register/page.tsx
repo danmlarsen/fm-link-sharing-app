@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -6,26 +7,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LoginForm from "./login-form";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import RegisterForm from "./register-form";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Login</CardTitle>
+        <CardTitle>Create account</CardTitle>
         <CardDescription>
-          Add your details below to get back into the app
+          Let's get your started sharing your links!
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <LoginForm />
+        <RegisterForm />
       </CardContent>
       <CardFooter>
-        <span>Don't have an account?</span>
+        <span>Already have an account?</span>
         <Button asChild>
-          <Link href="/register">Create account</Link>
+          <Link href="/login">Login</Link>
         </Button>
       </CardFooter>
     </Card>
