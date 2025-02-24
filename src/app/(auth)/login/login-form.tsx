@@ -35,7 +35,7 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="email"
@@ -49,7 +49,6 @@ export default function LoginForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -67,12 +66,13 @@ export default function LoginForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit">Login</Button>
+        <div className="flex flex-col">
+          <Button type="submit">Login</Button>
+        </div>
       </form>
     </Form>
   );

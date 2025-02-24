@@ -24,7 +24,7 @@ export default function LoginPage() {
       </CardContent>
       <CardFooter>
         <span>Don't have an account?</span>
-        <Button asChild>
+        <Button variant="ghost" asChild>
           <Link href="/register">Create account</Link>
         </Button>
       </CardFooter>

@@ -37,7 +37,7 @@ export default function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="email"
@@ -51,7 +51,6 @@ export default function RegisterForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -69,7 +68,6 @@ export default function RegisterForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -87,12 +85,13 @@ export default function RegisterForm() {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit">Create new account</Button>
+        <div className="flex flex-col">
+          <Button type="submit">Create new account</Button>
+        </div>
       </form>
     </Form>
   );

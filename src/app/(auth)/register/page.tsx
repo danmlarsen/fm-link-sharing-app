@@ -24,7 +24,7 @@ export default function RegisterPage() {
       </CardContent>
       <CardFooter>
         <span>Already have an account?</span>
-        <Button asChild>
+        <Button asChild variant="ghost">
           <Link href="/login">Login</Link>
         </Button>
       </CardFooter>
