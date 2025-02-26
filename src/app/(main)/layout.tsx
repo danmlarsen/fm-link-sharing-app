@@ -1,5 +1,8 @@
+import LinksButton from "@/components/links-button";
+import PreviewButton from "@/components/preview-button";
+import ProfileButton from "@/components/profile-button";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 
 export default function MainLayout({
   children,
@@ -11,23 +14,21 @@ export default function MainLayout({
       <header>
         <Card className="rounded-t-none">
           <CardContent className="flex justify-between">
-            <div>logo</div>
+            <Logo />
             <div>
-              <Link href="/links">Customize Links</Link>
-              <Link href="/profile">Profile details</Link>
+              <LinksButton />
+              <ProfileButton />
             </div>
-            <div>preview</div>
+            <div>
+              <PreviewButton />
+            </div>
           </CardContent>
         </Card>
       </header>
 
       <div className="grid md:grid-cols-[auto_1fr]">
         <aside className="hidden md:block">aside</aside>
-        <main className="grid px-4">
-          <Card className="grid">
-            <CardContent>{children}</CardContent>
-          </Card>
-        </main>
+        <main className="grid px-4">{children}</main>
       </div>
     </div>
   );
