@@ -2,7 +2,7 @@ import LinksButton from "@/components/links-button";
 import PreviewButton from "@/components/preview-button";
 import ProfileButton from "@/components/profile-button";
 import { Card, CardContent } from "@/components/ui/card";
-import Logo from "@/components/ui/Logo";
+import Logo from "@/components/logo";
 
 export default function MainLayout({
   children,

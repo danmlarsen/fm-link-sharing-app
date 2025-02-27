@@ -1,4 +1,4 @@
-import Logo from "@/components/ui/Logo";
+import Logo from "@/components/logo";
 
 export default function AuthLayout({
   children,
@@ -9,7 +9,7 @@ export default function AuthLayout({
     <main className="grid min-h-screen p-8 md:place-items-center">
       <div className="space-y-12">
         <div className="flex md:justify-center">
-          <Logo />
+          <Logo forceFullLogo={true} />
         </div>
         <div>{children}</div>
       </div>

@@ -30,16 +30,7 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const platforms = [
-  {
-    title: "GitHub",
-    url: "https://www.github.com",
-  },
-  {
-    title: "YouTube",
-    url: "https://www.youtube.com",
-  },
-];
+import { platforms } from "@/data/platforms";
 
 type TLink = {
   selectedPlatform: number;
@@ -177,7 +168,16 @@ function LinksItem({
                             key={platform.title}
                             value={platform.title}
                           >
-                            {platform.title}
+                            <div className="flex items-center gap-3">
+                              <div className="relative size-4">
+                                <Image
+                                  fill
+                                  src={platform.icon}
+                                  alt={platform.title}
+                                />
+                              </div>
+                              <div>{platform.title}</div>
+                            </div>
                           </SelectItem>
                         ))}
                       </SelectContent>

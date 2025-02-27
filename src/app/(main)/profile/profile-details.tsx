@@ -16,10 +16,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
-  avatar: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  email: z.string().email().optional(),
+  avatar: z.string().optional(),
+  firstName: z.string().min(1, "Can't be empty"),
+  lastName: z.string().min(1, "Can't be empty"),
+  email: z.string().optional(),
 });
 
 export default function ProfileDetails() {
