@@ -170,11 +170,7 @@ function LinksItem({
                           >
                             <div className="flex items-center gap-3">
                               <div className="relative size-4">
-                                <Image
-                                  fill
-                                  src={platform.icon}
-                                  alt={platform.title}
-                                />
+                                <Image fill src={platform.icon} alt="" />
                               </div>
                               <div>{platform.title}</div>
                             </div>
