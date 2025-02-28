@@ -3,6 +3,7 @@ import PreviewButton from "@/components/preview-button";
 import ProfileButton from "@/components/profile-button";
 import { Card, CardContent } from "@/components/ui/card";
 import Logo from "@/components/logo";
+import CustomizeNavButtons from "@/components/customize-nav-buttons";
 
 export default function MainLayout({
   children,
@@ -15,10 +16,7 @@ export default function MainLayout({
         <Card className="rounded-t-none">
           <CardContent className="flex justify-between">
             <Logo />
-            <div>
-              <LinksButton />
-              <ProfileButton />
-            </div>
+            <CustomizeNavButtons />
             <div>
               <PreviewButton />
             </div>
