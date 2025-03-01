@@ -159,7 +159,7 @@ function LinksItem({
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a platform" />
+                          <SelectValue />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
