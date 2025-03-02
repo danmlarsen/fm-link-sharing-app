@@ -27,9 +27,9 @@ const mockedLinks = [
 export default async function UserLinks({
   params,
 }: {
-  params: { userId: string };
+  params: { profileId: string };
 }) {
-  const { userId } = await params;
+  const { profileId } = await params;
 
   return (
     <Card className="mx-auto max-w-[237px] bg-transparent text-center">
@@ -61,7 +61,12 @@ function LinkItem({ data }: { data: { platformId: string; url: string } }) {
       <Link className="flex justify-between p-4" href={url} target="_blank">
         <div className="flex gap-2">
           <div className="relative size-6">
-            <Image className="" src={platform.icon} alt={platform.title} fill />
+            <Image
+              className="fill-white"
+              src={platform.icon}
+              alt={platform.title}
+              fill
+            />
           </div>
           <div>{platform?.title}</div>
         </div>

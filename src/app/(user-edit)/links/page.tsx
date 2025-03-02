@@ -22,9 +22,9 @@ export default function CustomizeLinksPage() {
       <CardContent>
         <LinksForm />
       </CardContent>
-      <CardFooter className="items-stretch">
+      {/* <CardFooter className="items-stretch">
         <Button>Save</Button>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }
