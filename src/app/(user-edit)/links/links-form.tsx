@@ -30,26 +30,19 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { platforms } from "@/data/platforms";
+import { linksFormSchema } from "@/validation/profile";
+import { TLink } from "@/types/profile";
+import { saveLinks } from "./actions";
+import { useAuth } from "@/context/auth";
 
-const linksFormSchema = z.object({
-  links: z.array(
-    z.object({
-      platform: z
-        .string()
-        .refine((value) =>
-          platforms.map((platform) => platform.id).includes(value),
-        ),
-      // TODO: Add URL validation
-      url: z.string().min(1, "Can't be empty"),
-    }),
-  ),
-});
+export default function LinksForm({ linksData }: { linksData: TLink[] }) {
+  const auth = useAuth();
 
-export default function LinksForm() {
   const form = useForm<z.infer<typeof linksFormSchema>>({
     resolver: zodResolver(linksFormSchema),
     defaultValues: {
       // links: [{ platform: "github", url: "https://www.github.com" }],
+      links: linksData,
     },
   });
 
@@ -62,9 +55,26 @@ export default function LinksForm() {
     control: form.control,
   });
 
-  function handleSubmit(data: z.infer<typeof linksFormSchema>) {
+  async function handleSubmit(data: z.infer<typeof linksFormSchema>) {
     console.log({ data });
+
+    const token = await auth?.currentUser?.getIdToken();
+
+    if (!token) {
+      return;
+    }
+
+    const response = await saveLinks({ links: data.links, token });
+
+    if (!!response?.error) {
+      console.log("Error!", response.message);
+      return;
+    }
+
+    console.log("Success!");
   }
+
+  console.log({ linksData });
 
   return (
     <Form {...form}>
@@ -126,7 +136,7 @@ export default function LinksForm() {
                             <FormLabel>Platform</FormLabel>
                             <Select
                               onValueChange={field.onChange}
-                              defaultValue={platforms[0].id}
+                              defaultValue={field.value}
                             >
                               <FormControl>
                                 <SelectTrigger>
