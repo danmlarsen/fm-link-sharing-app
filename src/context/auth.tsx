@@ -4,6 +4,7 @@ import { GoogleAuthProvider, signInWithPopup, type User } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "@/firebase/client";
 import { removeToken, setToken } from "./actions";
+import { getProfile } from "@/data/profile";
 
 type TAuthContext = {
   currentUser: User | null;

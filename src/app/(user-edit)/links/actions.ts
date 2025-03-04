@@ -1,6 +1,5 @@
 "use server";
 
-import { getProfile } from "@/data/profile";
 import { auth, firestore } from "@/firebase/server";
 import { TLink } from "@/types/profile";
 import { linksFormSchema } from "@/validation/profile";
@@ -30,12 +29,10 @@ export async function saveLinks({
     };
   }
 
-  const { data: profile } = await getProfile(userId);
-
-  if (!profile) return;
-
-  await firestore
-    .collection("profiles")
-    .doc(profile.id)
-    .update({ links: links });
+  firestore.collection("profiles").doc(userId).set(
+    {
+      links,
+    },
+    { merge: true },
+  );
 }

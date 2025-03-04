@@ -22,17 +22,17 @@ import { TProfile } from "@/types/profile";
 export default function ProfileDetails({
   profileData,
 }: {
-  profileData: TProfile;
+  profileData: TProfile | null;
 }) {
   const auth = useAuth();
 
   const form = useForm<z.infer<typeof profileDetailsFormSchema>>({
     resolver: zodResolver(profileDetailsFormSchema),
     defaultValues: {
-      avatar: profileData.avatar,
-      firstName: profileData.firstName,
-      lastName: profileData.lastName,
-      email: profileData.email,
+      avatar: profileData?.avatar || "",
+      firstName: profileData?.firstName || "",
+      lastName: profileData?.lastName || "",
+      email: profileData?.email || "",
     },
   });
 

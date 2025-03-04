@@ -28,7 +28,7 @@ export default async function ProfileDetailsPage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ProfileDetails profileData={profileData!} />
+        <ProfileDetails profileData={profileData} />
       </CardContent>
     </Card>
   );

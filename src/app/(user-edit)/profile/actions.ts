@@ -1,6 +1,5 @@
 "use server";
 
-import { getProfile } from "@/data/profile";
 import { auth, firestore } from "@/firebase/server";
 import { TProfileDetails } from "@/types/profile";
 import { profileDetailsFormSchema } from "@/validation/profile";
@@ -30,9 +29,13 @@ export async function saveProfileDetails({
     };
   }
 
-  const { data: profile } = await getProfile(userId);
-
-  if (!profile) return;
-
-  await firestore.collection("profiles").doc(profile.id).update(data);
+  firestore
+    .collection("profiles")
+    .doc(userId)
+    .set(
+      {
+        ...data,
+      },
+      { merge: true },
+    );
 }

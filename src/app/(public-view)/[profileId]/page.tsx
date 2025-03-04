@@ -6,23 +6,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { platforms } from "@/data/platforms";
+import { getProfile } from "@/data/profile";
 import Image from "next/image";
 import Link from "next/link";
-
-const mockedLinks = [
-  {
-    platformId: "github",
-    url: "https://www.github.com/danmlarsen",
-  },
-  {
-    platformId: "youtube",
-    url: "https://www.youtube.com/danmlarsen",
-  },
-  {
-    platformId: "linkedin",
-    url: "https://www.linkedin.com/danmlarsen",
-  },
-];
+import { notFound } from "next/navigation";
 
 export default async function UserLinks({
   params,
@@ -31,16 +18,22 @@ export default async function UserLinks({
 }) {
   const { profileId } = await params;
 
+  const { data: profileData } = await getProfile(profileId);
+
+  if (!profileData) return notFound();
+
   return (
     <Card className="mx-auto max-w-[237px] bg-transparent text-center">
       <CardHeader className="px-0">
-        <CardTitle>Dan M. Larsen</CardTitle>
-        <CardDescription>mail@danmarius.no</CardDescription>
+        <CardTitle>
+          {profileData.firstName} {profileData.lastName}
+        </CardTitle>
+        <CardDescription>{profileData.email}</CardDescription>
       </CardHeader>
       <CardContent className="px-0">
         <ul className="space-y-5">
-          {mockedLinks.map((link) => (
-            <LinkItem key={link.platformId} data={link} />
+          {profileData.links.map((link) => (
+            <LinkItem key={link.platform} data={link} />
           ))}
         </ul>
       </CardContent>
@@ -48,14 +41,14 @@ export default async function UserLinks({
   );
 }
 
-function LinkItem({ data }: { data: { platformId: string; url: string } }) {
-  const { platformId, url } = data;
+function LinkItem({ data }: { data: { platform: string; url: string } }) {
+  const { platform, url } = data;
 
-  const platform = platforms.find((platform) => platform.id === platformId)!;
+  const platformData = platforms.find((item) => item.id === platform)!;
 
   return (
     <li
-      style={{ backgroundColor: platform.color }}
+      style={{ backgroundColor: platformData.color }}
       className="rounded-md text-white"
     >
       <Link className="flex justify-between p-4" href={url} target="_blank">
@@ -63,12 +56,12 @@ function LinkItem({ data }: { data: { platformId: string; url: string } }) {
           <div className="relative size-6">
             <Image
               className="fill-white"
-              src={platform.icon}
-              alt={platform.title}
+              src={platformData.icon}
+              alt={platformData.title}
               fill
             />
           </div>
-          <div>{platform?.title}</div>
+          <div>{platformData?.title}</div>
         </div>
         <div>&rarr;</div>
       </Link>

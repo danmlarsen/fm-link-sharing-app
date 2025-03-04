@@ -21,7 +21,7 @@ export default async function CustomizeLinksPage() {
 
   const { data: profileData } = await getProfile(userId);
 
-  const { links: linksData } = profileData!;
+  const linksData = profileData?.links || [];
 
   return (
     <Card>
