@@ -14,6 +14,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import ContinueWithGoogleButton from "@/components/continue-with-google-button";
+import { useAuth } from "@/context/auth";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -21,6 +23,8 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const auth = useAuth();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,6 +76,11 @@ export default function LoginForm() {
 
         <div className="flex flex-col">
           <Button type="submit">Login</Button>
+        </div>
+
+        <div className="flex flex-col">
+          {/* TODO: Used for testing auth */}
+          {!auth?.currentUser && <ContinueWithGoogleButton />}
         </div>
       </form>
     </Form>

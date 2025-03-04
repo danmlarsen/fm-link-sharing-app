@@ -11,35 +11,51 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/context/auth";
+import { profileDetailsFormSchema } from "@/validation/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { saveProfileDetails } from "./actions";
+import { TProfile } from "@/types/profile";
 
-const formSchema = z.object({
-  avatar: z.string().optional(),
-  firstName: z.string().min(1, "Can't be empty"),
-  lastName: z.string().min(1, "Can't be empty"),
-  email: z.string().optional(),
-});
+export default function ProfileDetails({
+  profileData,
+}: {
+  profileData: TProfile;
+}) {
+  const auth = useAuth();
 
-export default function ProfileDetails() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof profileDetailsFormSchema>>({
+    resolver: zodResolver(profileDetailsFormSchema),
     defaultValues: {
-      avatar: "",
-      firstName: "",
-      lastName: "",
-      email: "",
+      avatar: profileData.avatar,
+      firstName: profileData.firstName,
+      lastName: profileData.lastName,
+      email: profileData.email,
     },
   });
 
-  function onSubmit() {
-    console.log("submit");
+  async function handleSubmit(data: z.infer<typeof profileDetailsFormSchema>) {
+    const token = await auth?.currentUser?.getIdToken();
+
+    if (!token) {
+      return;
+    }
+
+    const response = await saveProfileDetails({ data, token });
+
+    if (!!response?.error) {
+      console.log("Error!", response.message);
+      return;
+    }
+
+    console.log("Success!");
   }
 
   return (
     <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
         <Card className="bg-accent">
           <CardContent>
             <FormField

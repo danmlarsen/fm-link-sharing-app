@@ -14,3 +14,10 @@ export const linksFormSchema = z.object({
     }),
   ),
 });
+
+export const profileDetailsFormSchema = z.object({
+  avatar: z.string().optional(),
+  firstName: z.string().min(1, "Can't be empty"),
+  lastName: z.string().min(1, "Can't be empty"),
+  email: z.string().optional(),
+});

@@ -3,11 +3,11 @@
 import { useAuth } from "@/context/auth";
 import LinksButton from "./links-button";
 import ProfileButton from "./profile-button";
-import ContinueWithGoogleButton from "./continue-with-google-button";
-import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 export default function CustomizeNavButtons() {
   const auth = useAuth();
+  const router = useRouter();
 
   return (
     <div>
@@ -15,19 +15,8 @@ export default function CustomizeNavButtons() {
         <>
           <LinksButton />
           <ProfileButton />
-
-          {/* TODO: Used for testing auth */}
-          <Button
-            onClick={async () => {
-              await auth.logout();
-            }}
-          >
-            Logout
-          </Button>
         </>
       )}
-      {/* TODO: Used for testing auth */}
-      {!auth?.currentUser && <ContinueWithGoogleButton />}
     </div>
   );
 }

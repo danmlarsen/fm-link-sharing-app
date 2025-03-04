@@ -1,10 +1,14 @@
-export type TProfile = {
+export type TProfile = TProfileDetails & {
   id: string;
   uid: string;
-  email: string;
+  links: TLink[];
+};
+
+export type TProfileDetails = {
+  avatar?: string;
+  email?: string;
   firstName: string;
   lastName: string;
-  links: TLink[];
 };
 
 export type TLink = {
