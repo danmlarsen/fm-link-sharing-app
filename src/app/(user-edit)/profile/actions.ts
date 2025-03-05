@@ -4,6 +4,7 @@ import { auth, firestore } from "@/firebase/server";
 import { cloudinary } from "@/lib/cloudinary";
 import { TProfileDetails } from "@/types/profile";
 import { profileDetailsFormSchema } from "@/validation/profile";
+import { UploadApiErrorResponse } from "cloudinary";
 
 export async function saveProfileDetails({
   data,
@@ -34,7 +35,16 @@ export async function saveProfileDetails({
 
   let avatarPath = "";
   if (!!avatar?.file) {
-    // TODO: File upload
+    const bytes = await avatar.file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const uploadResult = await new Promise((resolve) => {
+      cloudinary.uploader
+        .upload_stream((error, uploadResult) => {
+          return resolve(uploadResult);
+        })
+        .end(buffer);
+    });
+    avatarPath = uploadResult?.secure_url ?? "";
   }
 
   const newData = { ...rest, avatar: avatarPath };
