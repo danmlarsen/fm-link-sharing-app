@@ -28,6 +28,12 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "@hello-pangea/dnd";
 
 import { platforms } from "@/data/platforms";
 import { linksFormSchema } from "@/validation/profile";
@@ -74,7 +80,14 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
     console.log("Success!");
   }
 
-  console.log({ linksData });
+  function handleDragEnd(result: DropResult) {
+    if (!result.destination) return;
+
+    const items = [...linkFields];
+    const [reorderedLink] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedLink);
+    form.setValue("links", items);
+  }
 
   return (
     <Form {...form}>
@@ -111,78 +124,104 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
           )}
 
           {linkFields.length > 0 && (
-            <ul className="space-y-6">
-              {linkFields.map((linkField, idx) => (
-                <li key={linkField.id}>
-                  <Card className="bg-accent">
-                    <CardHeader className="flex-row justify-between">
-                      <div>Link #{idx + 1}</div>
-                      <div>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          onClick={() => remove(idx)}
-                        >
-                          Remove
-                        </Button>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <FormField
-                        control={form.control}
-                        name={`links.${idx}.platform`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Platform</FormLabel>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {platforms.map((platform) => (
-                                  <SelectItem
-                                    key={platform.id}
-                                    value={platform.id}
+            <DragDropContext onDragEnd={handleDragEnd}>
+              <Droppable droppableId="links-dragdrop" direction="vertical">
+                {(provided) => (
+                  <ul
+                    className="space-y-6"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {linkFields.map((linkField, idx) => (
+                      <Draggable
+                        key={linkField.id}
+                        draggableId={linkField.id}
+                        index={idx}
+                      >
+                        {(provided) => (
+                          <li
+                            {...provided.dragHandleProps}
+                            {...provided.draggableProps}
+                            ref={provided.innerRef}
+                          >
+                            <Card className="bg-accent">
+                              <CardHeader className="flex-row justify-between">
+                                <div>Link #{idx + 1}</div>
+                                <div>
+                                  <Button
+                                    type="button"
+                                    variant="ghost"
+                                    onClick={() => remove(idx)}
                                   >
-                                    <div className="flex items-center gap-3">
-                                      <div>
-                                        <img src={platform.icon} alt="" />
-                                      </div>
-                                      <div>{platform.title}</div>
-                                    </div>
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </FormItem>
-                        )}
-                      />
+                                    Remove
+                                  </Button>
+                                </div>
+                              </CardHeader>
+                              <CardContent>
+                                <FormField
+                                  control={form.control}
+                                  name={`links.${idx}.platform`}
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>Platform</FormLabel>
+                                      <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                      >
+                                        <FormControl>
+                                          <SelectTrigger>
+                                            <SelectValue />
+                                          </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                          {platforms.map((platform) => (
+                                            <SelectItem
+                                              key={platform.id}
+                                              value={platform.id}
+                                            >
+                                              <div className="flex items-center gap-3">
+                                                <div>
+                                                  <img
+                                                    src={platform.icon}
+                                                    alt=""
+                                                  />
+                                                </div>
+                                                <div>{platform.title}</div>
+                                              </div>
+                                            </SelectItem>
+                                          ))}
+                                        </SelectContent>
+                                      </Select>
+                                    </FormItem>
+                                  )}
+                                />
 
-                      <FormField
-                        control={form.control}
-                        name={`links.${idx}.url`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Link</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder={`e.g. ${platforms[0].url}/test`}
-                                {...field}
-                              />
-                            </FormControl>
-                          </FormItem>
+                                <FormField
+                                  control={form.control}
+                                  name={`links.${idx}.url`}
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>Link</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          placeholder={`e.g. ${platforms[0].url}/test`}
+                                          {...field}
+                                        />
+                                      </FormControl>
+                                    </FormItem>
+                                  )}
+                                />
+                              </CardContent>
+                            </Card>
+                          </li>
                         )}
-                      />
-                    </CardContent>
-                  </Card>
-                </li>
-              ))}
-            </ul>
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </ul>
+                )}
+              </Droppable>
+            </DragDropContext>
           )}
         </div>
 

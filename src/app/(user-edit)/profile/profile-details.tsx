@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { saveProfileDetails } from "./actions";
 import { TProfile } from "@/types/profile";
+import ProfileImageUploader, { TImageUpload } from "./profile-image-uploader";
 
 export default function ProfileDetails({
   profileData,
@@ -29,7 +30,7 @@ export default function ProfileDetails({
   const form = useForm<z.infer<typeof profileDetailsFormSchema>>({
     resolver: zodResolver(profileDetailsFormSchema),
     defaultValues: {
-      avatar: profileData?.avatar || "",
+      avatar: undefined,
       firstName: profileData?.firstName || "",
       lastName: profileData?.lastName || "",
       email: profileData?.email || "",
@@ -43,7 +44,10 @@ export default function ProfileDetails({
       return;
     }
 
-    const response = await saveProfileDetails({ data, token });
+    const response = await saveProfileDetails({
+      data,
+      token,
+    });
 
     if (!!response?.error) {
       console.log("Error!", response.message);
@@ -65,7 +69,12 @@ export default function ProfileDetails({
                 <FormItem>
                   <FormLabel>Profile picture</FormLabel>
                   <FormControl>
-                    <Input type="file" {...field} />
+                    <ProfileImageUploader
+                      image={field.value}
+                      onImageChange={(image: TImageUpload) => {
+                        form.setValue("avatar", image);
+                      }}
+                    />
                   </FormControl>
                   <FormDescription>
                     Image must be below 1024x1024px. Use PNG or JPG format.

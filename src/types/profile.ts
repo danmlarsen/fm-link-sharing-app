@@ -4,8 +4,14 @@ export type TProfile = TProfileDetails & {
   links: TLink[];
 };
 
+export type TAvatar = {
+  id: string;
+  url: string;
+  file?: File;
+};
+
 export type TProfileDetails = {
-  avatar?: string;
+  avatar?: TAvatar | undefined;
   email?: string;
   firstName: string;
   lastName: string;

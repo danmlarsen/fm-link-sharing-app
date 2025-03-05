@@ -29,12 +29,21 @@ export async function saveProfileDetails({
     };
   }
 
+  const { avatar, ...rest } = data;
+
+  let avatarPath = "";
+  if (!!avatar) {
+    // TODO: File upload
+  }
+
+  const newData = { ...rest, avatar: avatarPath };
+
   firestore
     .collection("profiles")
     .doc(userId)
     .set(
       {
-        ...data,
+        ...newData,
       },
       { merge: true },
     );
