@@ -1,6 +1,7 @@
 "use server";
 
 import { auth, firestore } from "@/firebase/server";
+import { cloudinary } from "@/lib/cloudinary";
 import { TProfileDetails } from "@/types/profile";
 import { profileDetailsFormSchema } from "@/validation/profile";
 
@@ -32,7 +33,7 @@ export async function saveProfileDetails({
   const { avatar, ...rest } = data;
 
   let avatarPath = "";
-  if (!!avatar) {
+  if (!!avatar?.file) {
     // TODO: File upload
   }
 
