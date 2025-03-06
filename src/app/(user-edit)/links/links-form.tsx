@@ -50,7 +50,10 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
       // links: [{ platform: "github", url: "https://www.github.com" }],
       links: linksData,
     },
+    mode: "onChange",
   });
+
+  const watchedLinkFields = form.watch("links");
 
   const {
     fields: linkFields,
@@ -62,8 +65,6 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
   });
 
   async function handleSubmit(data: z.infer<typeof linksFormSchema>) {
-    console.log({ data });
-
     const token = await auth?.currentUser?.getIdToken();
 
     if (!token) {
@@ -76,14 +77,12 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
       console.log("Error!", response.message);
       return;
     }
-
-    console.log("Success!");
   }
 
   function handleDragEnd(result: DropResult) {
     if (!result.destination) return;
 
-    const items = [...linkFields];
+    const items = [...watchedLinkFields];
     const [reorderedLink] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedLink);
     form.setValue("links", items);
