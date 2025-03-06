@@ -77,8 +77,6 @@ export default function ProfileDetails({
       console.log("Error!", response.message);
       return;
     }
-
-    console.log("Success!");
   }
 
   return (

@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,
   CardContent,
@@ -25,6 +26,17 @@ export default async function UserLinks({
   return (
     <Card className="mx-auto max-w-[237px] bg-transparent text-center">
       <CardHeader className="px-0">
+        <div className="flex justify-center">
+          <Avatar className="size-28">
+            <AvatarImage
+              src={profileData.avatar}
+              alt={`${profileData.firstName} ${profileData.lastName} profile image`}
+            />
+            <AvatarFallback>
+              {profileData.firstName.at(0) + profileData.lastName.at(0)!}
+            </AvatarFallback>
+          </Avatar>
+        </div>
         <CardTitle>
           {profileData.firstName} {profileData.lastName}
         </CardTitle>
