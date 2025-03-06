@@ -173,22 +173,30 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
                                           </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                          {platforms.map((platform) => (
-                                            <SelectItem
-                                              key={platform.id}
-                                              value={platform.id}
-                                            >
-                                              <div className="flex items-center gap-3">
-                                                <div>
-                                                  <img
-                                                    src={platform.icon}
-                                                    alt=""
-                                                  />
+                                          {platforms.map((platform) => {
+                                            const Icon = platform.icon;
+
+                                            return (
+                                              <SelectItem
+                                                key={platform.id}
+                                                value={platform.id}
+                                              >
+                                                <div className="flex items-center gap-3">
+                                                  <div>
+                                                    <Icon
+                                                      className={
+                                                        field.value ===
+                                                        platform.id
+                                                          ? "text-purple-500"
+                                                          : ""
+                                                      }
+                                                    />
+                                                  </div>
+                                                  <div>{platform.title}</div>
                                                 </div>
-                                                <div>{platform.title}</div>
-                                              </div>
-                                            </SelectItem>
-                                          ))}
+                                              </SelectItem>
+                                            );
+                                          })}
                                         </SelectContent>
                                       </Select>
                                     </FormItem>

@@ -58,6 +58,8 @@ function LinkItem({ data }: { data: { platform: string; url: string } }) {
 
   const platformData = platforms.find((item) => item.id === platform)!;
 
+  const Icon = platformData.icon;
+
   return (
     <li
       style={{ backgroundColor: platformData.color }}
@@ -66,12 +68,7 @@ function LinkItem({ data }: { data: { platform: string; url: string } }) {
       <Link className="flex justify-between p-4" href={url} target="_blank">
         <div className="flex gap-2">
           <div className="relative size-6">
-            <Image
-              className="fill-white"
-              src={platformData.icon}
-              alt={platformData.title}
-              fill
-            />
+            <Icon className="text-white" />
           </div>
           <div>{platformData?.title}</div>
         </div>
