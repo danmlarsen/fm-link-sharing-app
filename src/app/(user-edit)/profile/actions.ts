@@ -2,9 +2,65 @@
 
 import { auth, firestore } from "@/firebase/server";
 import { cloudinary } from "@/lib/cloudinary";
-import { TProfileDetails } from "@/types/profile";
+import { TAvatar, TProfileDetails } from "@/types/profile";
 import { profileDetailsFormSchema } from "@/validation/profile";
-import { UploadApiErrorResponse } from "cloudinary";
+import { UploadApiResponse } from "cloudinary";
+
+export async function uploadProfilePicture(
+  { data }: { data: File },
+  token: string,
+) {
+  const verifiedToken = await auth.verifyIdToken(token);
+  if (!verifiedToken) {
+    return {
+      error: true,
+      message: "Unauthorized",
+    };
+  }
+
+  const userId = verifiedToken.uid;
+
+  try {
+    const bytes = await data.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const uploadResult: UploadApiResponse | undefined = await new Promise(
+      (resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            {
+              folder: process.env.CLOUDINARY_IMAGE_FOLDER,
+              use_filename: true,
+              filename_override: userId,
+              unique_filename: false,
+              overwrite: true,
+            },
+            (error, uploadResult) => {
+              if (!!error) reject(error.message);
+
+              return resolve(uploadResult);
+            },
+          )
+          .end(buffer);
+      },
+    );
+
+    if (!uploadResult?.secure_url) {
+      return {
+        error: true,
+        message: "An error occured when uploading profile image",
+      };
+    }
+
+    return {
+      url: uploadResult?.secure_url,
+    };
+  } catch (error) {
+    return {
+      error: true,
+      message: error,
+    };
+  }
+}
 
 export async function saveProfileDetails({
   data,
@@ -31,30 +87,12 @@ export async function saveProfileDetails({
     };
   }
 
-  const { avatar, ...rest } = data;
-
-  let avatarPath = "";
-  if (!!avatar?.file) {
-    const bytes = await avatar.file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const uploadResult = await new Promise((resolve) => {
-      cloudinary.uploader
-        .upload_stream((error, uploadResult) => {
-          return resolve(uploadResult);
-        })
-        .end(buffer);
-    });
-    avatarPath = uploadResult?.secure_url ?? "";
-  }
-
-  const newData = { ...rest, avatar: avatarPath };
-
   firestore
     .collection("profiles")
     .doc(userId)
     .set(
       {
-        ...newData,
+        ...data,
       },
       { merge: true },
     );

@@ -11,7 +11,7 @@ export type TAvatar = {
 };
 
 export type TProfileDetails = {
-  avatar?: TAvatar | undefined;
+  avatar?: string;
   email?: string;
   firstName: string;
   lastName: string;

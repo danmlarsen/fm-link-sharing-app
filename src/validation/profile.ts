@@ -16,6 +16,12 @@ export const linksFormSchema = z.object({
 });
 
 export const profileDetailsFormSchema = z.object({
+  firstName: z.string().min(1, "Can't be empty"),
+  lastName: z.string().min(1, "Can't be empty"),
+  email: z.string().optional(),
+});
+
+export const profilePictureSchema = z.object({
   avatar: z
     .object({
       id: z.string(),
@@ -23,7 +29,4 @@ export const profileDetailsFormSchema = z.object({
       file: z.instanceof(File).optional(),
     })
     .optional(),
-  firstName: z.string().min(1, "Can't be empty"),
-  lastName: z.string().min(1, "Can't be empty"),
-  email: z.string().optional(),
 });

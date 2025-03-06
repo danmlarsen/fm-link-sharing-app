@@ -12,13 +12,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/auth";
-import { profileDetailsFormSchema } from "@/validation/profile";
+import {
+  profileDetailsFormSchema,
+  profilePictureSchema,
+} from "@/validation/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { saveProfileDetails } from "./actions";
+import { saveProfileDetails, uploadProfilePicture } from "./actions";
 import { TProfile } from "@/types/profile";
 import ProfileImageUploader, { TImageUpload } from "./profile-image-uploader";
+
+const formSchema = profileDetailsFormSchema.and(profilePictureSchema);
 
 export default function ProfileDetails({
   profileData,
@@ -27,25 +32,44 @@ export default function ProfileDetails({
 }) {
   const auth = useAuth();
 
-  const form = useForm<z.infer<typeof profileDetailsFormSchema>>({
-    resolver: zodResolver(profileDetailsFormSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
-      avatar: undefined,
+      avatar: !!profileData?.avatar
+        ? { id: profileData.id, url: profileData.avatar }
+        : undefined,
       firstName: profileData?.firstName || "",
       lastName: profileData?.lastName || "",
       email: profileData?.email || "",
     },
   });
 
-  async function handleSubmit(data: z.infer<typeof profileDetailsFormSchema>) {
+  async function handleSubmit(data: z.infer<typeof formSchema>) {
     const token = await auth?.currentUser?.getIdToken();
 
     if (!token) {
       return;
     }
 
+    let avatarPath = data.avatar?.url ?? "";
+    if (!!data.avatar?.file) {
+      const uploadResponse = await uploadProfilePicture(
+        { data: data.avatar.file },
+        token,
+      );
+
+      if (!uploadResponse.error && uploadResponse.url) {
+        avatarPath = uploadResponse.url;
+      }
+    }
+
+    const newData = {
+      ...data,
+      avatar: avatarPath,
+    };
+
     const response = await saveProfileDetails({
-      data,
+      data: newData,
       token,
     });
 
