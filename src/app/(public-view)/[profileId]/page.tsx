@@ -67,8 +67,8 @@ function LinkItem({ data }: { data: { platform: string; url: string } }) {
     >
       <Link className="flex justify-between p-4" href={url} target="_blank">
         <div className="flex gap-2">
-          <div className="relative size-6">
-            <Icon className="text-white" />
+          <div className="relative flex size-6 items-center">
+            <Icon className="size-5 text-white" />
           </div>
           <div>{platformData?.title}</div>
         </div>

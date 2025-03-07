@@ -22,6 +22,10 @@ import { z } from "zod";
 import { saveProfileDetails, uploadProfilePicture } from "./actions";
 import { TProfile } from "@/types/profile";
 import ProfileImageUploader, { TImageUpload } from "./profile-image-uploader";
+import { toast } from "sonner";
+import Image from "next/image";
+
+import IconSaved from "@/assets/images/icon-changes-saved.svg";
 
 const formSchema = profileDetailsFormSchema.and(profilePictureSchema);
 
@@ -77,6 +81,13 @@ export default function ProfileDetails({
       console.log("Error!", response.message);
       return;
     }
+
+    toast(
+      <div className="flex items-center gap-2.5">
+        <Image src={IconSaved} alt="Saved icon" />
+        <span>Your changes have been successfully saved!</span>
+      </div>,
+    );
   }
 
   return (

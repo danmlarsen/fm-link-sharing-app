@@ -7,6 +7,9 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { toast } from "sonner";
 
+import IconLinkCopied from "@/assets/images/icon-link-copied-to-clipboard.svg";
+import Image from "next/image";
+
 export default function PreviewHeader() {
   const auth = useAuth();
   const { profileId } = useParams();
@@ -19,9 +22,10 @@ export default function PreviewHeader() {
     navigator.clipboard.writeText(url.toString());
 
     toast(
-      <p className="font-semibold">
-        The link has been copied to your clipboard!
-      </p>,
+      <div className="flex items-center gap-2.5">
+        <Image src={IconLinkCopied} alt="Link copied icon" />
+        <span>The link has been copied to your clipboard!</span>
+      </div>,
     );
   }
 

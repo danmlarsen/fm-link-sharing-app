@@ -40,6 +40,11 @@ import { linksFormSchema } from "@/validation/profile";
 import { TLink } from "@/types/profile";
 import { saveLinks } from "./actions";
 import { useAuth } from "@/context/auth";
+import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+
+import IconSaved from "@/assets/images/icon-changes-saved.svg";
+import IconDragAndDrop from "@/assets/images/icon-drag-and-drop.svg";
 
 export default function LinksForm({ linksData }: { linksData: TLink[] }) {
   const auth = useAuth();
@@ -77,6 +82,13 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
       console.log("Error!", response.message);
       return;
     }
+
+    toast(
+      <div className="flex items-center gap-2.5">
+        <Image src={IconSaved} alt="Saved icon" />
+        <span>Your changes have been successfully saved!</span>
+      </div>,
+    );
   }
 
   function handleDragEnd(result: DropResult) {
@@ -145,7 +157,13 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
                           >
                             <Card className="bg-accent">
                               <CardHeader className="flex-row justify-between">
-                                <div>Link #{idx + 1}</div>
+                                <div className="flex items-center gap-2">
+                                  <Image
+                                    src={IconDragAndDrop}
+                                    alt="Drag and drop icon"
+                                  />
+                                  <span>Link #{idx + 1}</span>
+                                </div>
                                 <div>
                                   <Button
                                     type="button"
@@ -183,14 +201,7 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
                                               >
                                                 <div className="flex items-center gap-3">
                                                   <div>
-                                                    <Icon
-                                                      className={
-                                                        field.value ===
-                                                        platform.id
-                                                          ? "text-purple-500"
-                                                          : ""
-                                                      }
-                                                    />
+                                                    <Icon className="text-current" />
                                                   </div>
                                                   <div>{platform.title}</div>
                                                 </div>
