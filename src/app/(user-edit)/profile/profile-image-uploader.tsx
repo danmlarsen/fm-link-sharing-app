@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useRef } from "react";
 
+import UploadImageIcon from "@/components/ui/upload-image-icon";
+
 export type TImageUpload = {
   id: string;
   url: string;
@@ -31,7 +33,7 @@ export default function ProfileImageUploader({
   }
 
   return (
-    <div>
+    <div className="text-primary font-semibold">
       <input
         className="hidden"
         ref={uploadInputRef}
@@ -40,14 +42,25 @@ export default function ProfileImageUploader({
         onChange={handleInputChange}
       />
       <button
-        className="relative size-48 cursor-pointer rounded-lg bg-purple-400"
+        className="bg-muted relative size-48 cursor-pointer overflow-hidden rounded-lg"
         type="button"
         onClick={() => uploadInputRef?.current?.click()}
       >
         {!!image && (
-          <Image src={image.url} alt="" fill className="object-cover" />
+          <>
+            <Image src={image.url} alt="" fill className="object-cover" />
+            <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/50 text-white opacity-0 transition-opacity duration-300 hover:opacity-100">
+              <UploadImageIcon />
+              <span>Change Image</span>
+            </span>
+          </>
         )}
-        {!image && <span>Upload image</span>}
+        {!image && (
+          <span className="flex flex-col items-center justify-center gap-2">
+            <UploadImageIcon />
+            <span>+ Upload Image</span>
+          </span>
+        )}
       </button>
     </div>
   );
