@@ -11,9 +11,10 @@ export default function PreviewButton() {
   const auth = useAuth();
 
   return (
-    <Button variant="outline" asChild>
+    <Button variant="outline" asChild className="text-primary font-semibold">
       <Link href={`/${auth.currentUser?.uid}`}>
-        <Image src={PreviewIcon} alt="Preview icon" />
+        <Image className="md:hidden" src={PreviewIcon} alt="Preview icon" />
+        <span className="hidden md:inline">Preview</span>
       </Link>
     </Button>
   );

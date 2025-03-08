@@ -45,6 +45,9 @@ import { toast } from "sonner";
 
 import IconSaved from "@/assets/images/icon-changes-saved.svg";
 import IconDragAndDrop from "@/assets/images/icon-drag-and-drop.svg";
+import IconInput from "@/components/ui/icon-input";
+
+import IconLink from "@/assets/images/icon-link.svg";
 
 export default function LinksForm({ linksData }: { linksData: TLink[] }) {
   const auth = useAuth();
@@ -174,7 +177,7 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
                                   </Button>
                                 </div>
                               </CardHeader>
-                              <CardContent>
+                              <CardContent className="space-y-3">
                                 <FormField
                                   control={form.control}
                                   name={`links.${idx}.platform`}
@@ -221,9 +224,15 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
                                     <FormItem>
                                       <FormLabel>Link</FormLabel>
                                       <FormControl>
-                                        <Input
-                                          placeholder={`e.g. ${platforms[0].url}/test`}
+                                        <IconInput
                                           {...field}
+                                          placeholder={`e.g. ${platforms[0].url}/test`}
+                                          icon={
+                                            <Image
+                                              src={IconLink}
+                                              alt="Link icon"
+                                            />
+                                          }
                                         />
                                       </FormControl>
                                     </FormItem>

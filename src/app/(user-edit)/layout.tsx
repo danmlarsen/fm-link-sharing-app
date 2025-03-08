@@ -1,6 +1,4 @@
-import LinksButton from "@/components/links-button";
 import PreviewButton from "@/components/preview-button";
-import ProfileButton from "@/components/profile-button";
 import { Card, CardContent } from "@/components/ui/card";
 import Logo from "@/components/logo";
 import CustomizeNavButtons from "@/components/customize-nav-buttons";
@@ -24,9 +22,11 @@ export default function MainLayout({
         </Card>
       </header>
 
-      <div className="grid md:grid-cols-[auto_1fr]">
-        <aside className="hidden md:block">aside</aside>
-        <main className="grid px-4">{children}</main>
+      <div className="grid lg:grid-cols-[auto_1fr]">
+        <aside className="hidden lg:block">aside</aside>
+        <main className="grid px-4">
+          <div className="mx-auto w-full max-w-2xl">{children}</div>
+        </main>
       </div>
     </div>
   );

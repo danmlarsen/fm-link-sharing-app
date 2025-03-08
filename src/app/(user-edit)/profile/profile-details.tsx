@@ -99,19 +99,21 @@ export default function ProfileDetails({
               control={form.control}
               name="avatar"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
                   <FormLabel>Profile picture</FormLabel>
-                  <FormControl>
-                    <ProfileImageUploader
-                      image={field.value}
-                      onImageChange={(image: TImageUpload) => {
-                        form.setValue("avatar", image);
-                      }}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Image must be below 1024x1024px. Use PNG or JPG format.
-                  </FormDescription>
+                  <div className="flex flex-col gap-6 md:flex-row md:items-center">
+                    <FormControl>
+                      <ProfileImageUploader
+                        image={field.value}
+                        onImageChange={(image: TImageUpload) => {
+                          form.setValue("avatar", image);
+                        }}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Image must be below 1024x1024px. Use PNG or JPG format.
+                    </FormDescription>
+                  </div>
                 </FormItem>
               )}
             />
@@ -124,7 +126,7 @@ export default function ProfileDetails({
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
                   <FormLabel>First name*</FormLabel>
                   <FormControl>
                     <Input placeholder="" {...field} />
@@ -136,7 +138,7 @@ export default function ProfileDetails({
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
                   <FormLabel>Last name*</FormLabel>
                   <FormControl>
                     <Input placeholder="" {...field} />
@@ -148,7 +150,7 @@ export default function ProfileDetails({
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="" type="email" {...field} />
