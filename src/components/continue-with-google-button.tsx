@@ -12,8 +12,10 @@ export default function ContinueWithGoogleButton() {
     <Button
       type="button"
       onClick={async () => {
-        await auth?.loginWithGoogle();
-        router.refresh();
+        try {
+          await auth?.loginWithGoogle();
+          router.refresh();
+        } catch (error) {}
       }}
     >
       Continue with Google
