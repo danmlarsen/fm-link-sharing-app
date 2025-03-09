@@ -14,16 +14,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-  confirmPassword: z.string(),
-});
+import { registerUserSchema } from "@/validation/registerUser";
+import { registerUser } from "./actions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const router = useRouter();
+  const form = useForm<z.infer<typeof registerUserSchema>>({
+    resolver: zodResolver(registerUserSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -31,13 +30,23 @@ export default function RegisterForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function handleSubmit(data: z.infer<typeof registerUserSchema>) {
+    const response = await registerUser(data);
+
+    if (!!response?.error) {
+      toast.error("Error", { description: response.message });
+      return;
+    }
+
+    toast.success("Success", {
+      description: "Your account was created successfully!",
+    });
+    router.push("/login");
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="email"
@@ -51,6 +60,7 @@ export default function RegisterForm() {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -68,6 +78,7 @@ export default function RegisterForm() {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -85,6 +96,7 @@ export default function RegisterForm() {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

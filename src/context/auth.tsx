@@ -1,13 +1,18 @@
 "use client";
 
-import { GoogleAuthProvider, signInWithPopup, type User } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  type User,
+} from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "@/firebase/client";
 import { removeToken, setToken } from "./actions";
-import { getProfile } from "@/data/profile";
 
 type TAuthContext = {
   currentUser: User | null;
+  loginWithEmailAndPassword: (email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -36,6 +41,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, []);
 
+  async function loginWithEmailAndPassword(email: string, password: string) {
+    await signInWithEmailAndPassword(auth, email, password);
+  }
+
   async function loginWithGoogle() {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
@@ -49,6 +58,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         currentUser,
+        loginWithEmailAndPassword,
         loginWithGoogle,
         logout,
       }}

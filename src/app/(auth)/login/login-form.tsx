@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ContinueWithGoogleButton from "@/components/continue-with-google-button";
 import { useAuth } from "@/context/auth";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -24,6 +26,7 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const auth = useAuth();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,13 +36,23 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function handleSubmit(data: z.infer<typeof formSchema>) {
+    try {
+      await auth.loginWithEmailAndPassword(data.email, data.password);
+      router.refresh();
+    } catch (error: any) {
+      toast("Error!", {
+        description:
+          error.code === "auth/invalid-credential"
+            ? "Incorrect credentials"
+            : "An error occured",
+      });
+    }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="email"
