@@ -4,6 +4,10 @@ import Image from "next/image";
 import { useRef } from "react";
 
 import UploadImageIcon from "@/components/ui/upload-image-icon";
+import { toast } from "sonner";
+
+const allowedTypes = ["image/jpeg", "image/png"];
+const maxSize = 1 * 1024 * 1024; // 1MB
 
 export type TImageUpload = {
   id: string;
@@ -24,12 +28,26 @@ export default function ProfileImageUploader({
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const [file] = e.target.files || [];
-    const newImage = {
+    if (!file) return;
+
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Error", {
+        description: "Profile picture is an invalid file type",
+      });
+      return;
+    }
+
+    if (file.size > maxSize) {
+      toast.error("Error", { description: "Image exceeded 1 MB limit" });
+      return;
+    }
+
+    const newImageObject = {
       id: `${Date.now()}-${file.name}`,
       url: URL.createObjectURL(file),
       file,
     };
-    onImageChange(newImage);
+    onImageChange(newImageObject);
   }
 
   return (
@@ -38,7 +56,7 @@ export default function ProfileImageUploader({
         className="hidden"
         ref={uploadInputRef}
         type="file"
-        accept="image/*"
+        accept="image/png, image/jpeg, image/jpg"
         onChange={handleInputChange}
       />
       <button

@@ -2,9 +2,10 @@
 
 import { auth, firestore } from "@/firebase/server";
 import { cloudinary } from "@/lib/cloudinary";
-import { TAvatar, TProfileDetails } from "@/types/profile";
+import { TProfileDetails } from "@/types/profile";
 import { profileDetailsFormSchema } from "@/validation/profile";
 import { UploadApiResponse } from "cloudinary";
+import sharp from "sharp";
 
 export async function uploadProfilePicture(
   { data }: { data: File },
@@ -23,6 +24,19 @@ export async function uploadProfilePicture(
   try {
     const bytes = await data.arrayBuffer();
     const buffer = Buffer.from(bytes);
+
+    const metadata = await sharp(buffer).metadata();
+
+    // Validate file type
+    if (!["jpeg", "png"].includes(metadata.format || "")) {
+      throw new Error("Profile picture is an invalid file type");
+    }
+
+    // Validate resolution
+    if (metadata.width! > 1024 || metadata.height! > 1024) {
+      throw new Error("Profile picture resolution exceeds 1024x1024");
+    }
+
     const uploadResult: UploadApiResponse | undefined = await new Promise(
       (resolve, reject) => {
         cloudinary.uploader
@@ -54,10 +68,10 @@ export async function uploadProfilePicture(
     return {
       url: uploadResult?.secure_url,
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       error: true,
-      message: error,
+      message: error?.message ?? "An error occured",
     };
   }
 }

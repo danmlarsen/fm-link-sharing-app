@@ -62,9 +62,13 @@ export default function ProfileDetails({
         token,
       );
 
-      if (!uploadResponse.error && uploadResponse.url) {
-        avatarPath = uploadResponse.url;
+      if (!!uploadResponse.error) {
+        toast.error("Error", { description: uploadResponse.message });
+        return;
       }
+
+      avatarPath = uploadResponse?.url ?? "";
+      form.setValue("avatar.file", undefined);
     }
 
     const newData = {
@@ -78,7 +82,7 @@ export default function ProfileDetails({
     });
 
     if (!!response?.error) {
-      console.log("Error!", response.message);
+      toast.error("Error!", { description: response.message });
       return;
     }
 
