@@ -31,7 +31,7 @@ export default function PreviewHeader() {
 
   if (!!auth?.currentUser && profileId === userId)
     return (
-      <header>
+      <header className="md:px-6 md:py-6">
         <Card>
           <CardContent className="flex justify-between">
             <Button variant="outline" asChild>

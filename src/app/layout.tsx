@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${instrumentSans.className} bg-background antialiased`}>
         <AuthProvider>{children}</AuthProvider>
-        <Toaster />
+        <Toaster position="bottom-center" />
       </body>
     </html>
   );
