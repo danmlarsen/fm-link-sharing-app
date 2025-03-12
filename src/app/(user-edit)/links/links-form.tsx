@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -26,7 +27,7 @@ import {
 } from "@/components/ui/form";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DragDropContext,
@@ -40,7 +41,7 @@ import { linksFormSchema } from "@/validation/profile";
 import { TLink } from "@/types/profile";
 import { saveLinks } from "./actions";
 import { useAuth } from "@/context/auth";
-import { cn } from "@/lib/utils";
+
 import { toast } from "sonner";
 
 import IconSaved from "@/assets/images/icon-changes-saved.svg";
@@ -55,7 +56,6 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
   const form = useForm<z.infer<typeof linksFormSchema>>({
     resolver: zodResolver(linksFormSchema),
     defaultValues: {
-      // links: [{ platform: "github", url: "https://www.github.com" }],
       links: linksData,
     },
     mode: "onChange",
@@ -253,7 +253,7 @@ export default function LinksForm({ linksData }: { linksData: TLink[] }) {
         </div>
 
         <div className="flex flex-col">
-          <Button>Save</Button>
+          <Button type="submit">Save</Button>
         </div>
       </form>
     </Form>

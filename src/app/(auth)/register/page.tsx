@@ -12,17 +12,17 @@ import RegisterForm from "./register-form";
 
 export default function RegisterPage() {
   return (
-    <Card>
-      <CardHeader>
+    <Card className="md:py-10">
+      <CardHeader className="md:px-10">
         <CardTitle>Create account</CardTitle>
         <CardDescription>
           Let's get your started sharing your links!
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="md:px-10">
         <RegisterForm />
       </CardContent>
-      <CardFooter>
+      <CardFooter className="md:px-10">
         <span>Already have an account?</span>
         <Button asChild variant="ghost">
           <Link href="/login">Login</Link>
