@@ -1,17 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useAuth } from "@/context/auth";
+import { TProfile } from "@/types/profile";
 import {
   profileDetailsFormSchema,
   profilePictureSchema,
@@ -19,15 +8,24 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import ProfileDetailsForm from "./profile-details-form";
+import { useAuth } from "@/context/auth";
 import { saveProfileDetails, uploadProfilePicture } from "./actions";
-import { TProfile } from "@/types/profile";
-import ProfileImageUploader, { TImageUpload } from "./profile-image-uploader";
 import { toast } from "sonner";
 import Image from "next/image";
 
 import IconSaved from "@/assets/images/icon-changes-saved.svg";
 
-const formSchema = profileDetailsFormSchema.and(profilePictureSchema);
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import PhoneMockup from "@/components/ui/phone-mockup";
+
+export const formSchema = profileDetailsFormSchema.and(profilePictureSchema);
 
 export default function ProfileDetails({
   profileData,
@@ -35,7 +33,6 @@ export default function ProfileDetails({
   profileData: TProfile | null;
 }) {
   const auth = useAuth();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,6 +43,7 @@ export default function ProfileDetails({
       lastName: profileData?.lastName || "",
       email: profileData?.email || "",
     },
+    mode: "onChange",
   });
 
   async function handleSubmit(data: z.infer<typeof formSchema>) {
@@ -94,81 +92,39 @@ export default function ProfileDetails({
     );
   }
 
+  const phoneMockupData = {
+    firstName: form.getValues("firstName"),
+    lastName: form.getValues("lastName"),
+    avatar: form.getValues("avatar.url"),
+    email: form.getValues("email"),
+  };
+
+  form.watch(["firstName", "lastName", "email", "avatar"]);
+
   return (
-    <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
-        <Card className="bg-accent">
+    <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-[auto_1fr]">
+      <aside className="hidden w-[400px] lg:grid">
+        <Card>
           <CardContent>
-            <FormField
-              control={form.control}
-              name="avatar"
-              render={({ field }) => (
-                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
-                  <FormLabel>Profile picture</FormLabel>
-                  <div className="flex flex-col gap-6 md:flex-row md:items-center">
-                    <FormControl>
-                      <ProfileImageUploader
-                        image={field.value}
-                        onImageChange={(image: TImageUpload) => {
-                          form.setValue("avatar", image);
-                        }}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      Image must be below 1024x1024px. Use PNG or JPG format.
-                    </FormDescription>
-                  </div>
-                </FormItem>
-              )}
-            />
+            <PhoneMockup data={phoneMockupData} />
           </CardContent>
         </Card>
-
-        <Card className="bg-accent">
-          <CardContent className="space-y-3">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
-                  <FormLabel>First name*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
-                  <FormLabel>Last name*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" type="email" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </CardContent>
-        </Card>
-
-        <div className="flex flex-col px-6">
-          <Button>Save</Button>
+      </aside>
+      <main className="grid">
+        <div className="mx-auto w-full max-w-2xl">
+          <Card>
+            <CardHeader>
+              <CardTitle>Profile Details</CardTitle>
+              <CardDescription>
+                Add your details to create a personal touch to your profile.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ProfileDetailsForm form={form} handleSubmit={handleSubmit} />
+            </CardContent>
+          </Card>
         </div>
-      </form>
-    </Form>
+      </main>
+    </div>
   );
 }

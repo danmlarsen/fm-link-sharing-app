@@ -22,12 +22,7 @@ export default function MainLayout({
         </Card>
       </header>
 
-      <div className="grid lg:grid-cols-[auto_1fr]">
-        <aside className="hidden lg:block">aside</aside>
-        <main className="grid px-4">
-          <div className="mx-auto w-full max-w-2xl">{children}</div>
-        </main>
-      </div>
+      <div className="flex flex-col">{children}</div>
     </div>
   );
 }
