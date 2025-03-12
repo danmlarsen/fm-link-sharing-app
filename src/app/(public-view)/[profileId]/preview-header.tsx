@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/context/auth";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { toast } from "sonner";
 
 import IconLinkCopied from "@/assets/images/icon-link-copied-to-clipboard.svg";
@@ -16,17 +16,33 @@ export default function PreviewHeader() {
 
   const userId = auth.currentUser?.uid;
 
-  function handleShareLink() {
+  async function handleShareLink() {
     const url = new URL(window.location.href);
     url.search = "";
-    navigator.clipboard.writeText(url.toString());
 
-    toast(
-      <div className="flex items-center gap-2.5">
-        <Image src={IconLinkCopied} alt="Link copied icon" />
-        <span>The link has been copied to your clipboard!</span>
-      </div>,
-    );
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url.toString());
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = url.toString();
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+
+      toast(
+        <div className="flex items-center gap-2.5">
+          <Image src={IconLinkCopied} alt="Link copied icon" />
+          <span>The link has been copied to your clipboard!</span>
+        </div>,
+      );
+    } catch (error: any) {
+      toast.error("Failed to copy link to clipboard", {
+        description: error?.message ?? "An error occured",
+      });
+    }
   }
 
   if (!!auth?.currentUser && profileId === userId)
