@@ -25,10 +25,9 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DragDropContext,
   Draggable,
@@ -50,16 +49,12 @@ import IconInput from "@/components/ui/icon-input";
 
 import IconLink from "@/assets/images/icon-link.svg";
 
-export default function LinksForm({ linksData }: { linksData: TLink[] }) {
+export default function LinksForm({
+  form,
+}: {
+  form: UseFormReturn<z.infer<typeof linksFormSchema>>;
+}) {
   const auth = useAuth();
-
-  const form = useForm<z.infer<typeof linksFormSchema>>({
-    resolver: zodResolver(linksFormSchema),
-    defaultValues: {
-      links: linksData,
-    },
-    mode: "onChange",
-  });
 
   const watchedLinkFields = form.watch("links");
 

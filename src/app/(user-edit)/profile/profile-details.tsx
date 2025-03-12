@@ -97,12 +97,13 @@ export default function ProfileDetails({
     lastName: form.getValues("lastName"),
     avatar: form.getValues("avatar.url"),
     email: form.getValues("email"),
+    links: profileData?.links || [],
   };
 
   form.watch(["firstName", "lastName", "email", "avatar"]);
 
   return (
-    <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-[auto_1fr]">
+    <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 lg:grid-cols-[auto_1fr]">
       <aside className="hidden w-[400px] lg:grid">
         <Card>
           <CardContent>
@@ -111,7 +112,7 @@ export default function ProfileDetails({
         </Card>
       </aside>
       <main className="grid">
-        <div className="mx-auto w-full max-w-2xl">
+        <div className="mx-auto w-full">
           <Card>
             <CardHeader>
               <CardTitle>Profile Details</CardTitle>

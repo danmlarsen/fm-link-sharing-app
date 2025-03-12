@@ -57,11 +57,29 @@ export default function PhoneMockup({
         </foreignObject>
       )}
 
-      <rect width="237" height="44" x="35" y="278" fill="#EEE" rx="8" />
-      <rect width="237" height="44" x="35" y="342" fill="#EEE" rx="8" />
-      <rect width="237" height="44" x="35" y="406" fill="#EEE" rx="8" />
-      <rect width="237" height="44" x="35" y="470" fill="#EEE" rx="8" />
-      <rect width="237" height="44" x="35" y="534" fill="#EEE" rx="8" />
+      {data.links?.length === 0 && (
+        <>
+          <rect width="237" height="44" x="35" y="278" fill="#EEE" rx="8" />
+          <rect width="237" height="44" x="35" y="342" fill="#EEE" rx="8" />
+          <rect width="237" height="44" x="35" y="406" fill="#EEE" rx="8" />
+          <rect width="237" height="44" x="35" y="470" fill="#EEE" rx="8" />
+          <rect width="237" height="44" x="35" y="534" fill="#EEE" rx="8" />
+        </>
+      )}
+
+      {!!data.links && data.links.length > 0 && (
+        <foreignObject x="35" y="278" width="237" height={220}>
+          <ul>
+            {data.links.map((link, index) => {
+              return (
+                <li key={index} className="text-center">
+                  {link.platform}
+                </li>
+              );
+            })}
+          </ul>
+        </foreignObject>
+      )}
     </svg>
   );
 }
