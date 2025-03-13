@@ -6,12 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { platforms } from "@/data/platforms";
+
 import { getProfile } from "@/data/profile";
-import Link from "next/link";
+
 import { notFound } from "next/navigation";
-import IconArrowRight from "@/assets/images/icon-arrow-right.svg";
-import Image from "next/image";
+
+import PlatformLinkItem from "@/components/PlatformLinkItem";
 
 export default async function UserLinks({
   params,
@@ -46,41 +46,14 @@ export default async function UserLinks({
       <CardContent className="mt-14 px-0">
         <ul className="space-y-5">
           {profileData.links.map((link) => (
-            <LinkItem key={link.platform} data={link} />
+            <PlatformLinkItem
+              key={link.platform}
+              data={link}
+              className="h-14"
+            />
           ))}
         </ul>
       </CardContent>
     </Card>
-  );
-}
-
-function LinkItem({ data }: { data: { platform: string; url: string } }) {
-  const { platform, url } = data;
-
-  const platformData = platforms.find((item) => item.id === platform)!;
-
-  const Icon = platformData.icon;
-
-  return (
-    <li
-      style={{ backgroundColor: platformData.color }}
-      className="rounded-md text-white"
-    >
-      <Link
-        className="flex items-center justify-between p-4"
-        href={url}
-        target="_blank"
-      >
-        <div className="flex gap-2">
-          <div className="relative flex size-6 items-center">
-            <Icon className="size-5 text-white" />
-          </div>
-          <div>{platformData?.title}</div>
-        </div>
-        <div>
-          <Image src={IconArrowRight} alt="Right arrow icon" />
-        </div>
-      </Link>
-    </li>
   );
 }

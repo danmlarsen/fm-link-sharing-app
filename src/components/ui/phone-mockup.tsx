@@ -1,6 +1,8 @@
+import { platforms } from "@/data/platforms";
 import { cn } from "@/lib/utils";
 import { TLink, TProfile, TProfileDetails } from "@/types/profile";
 import Image from "next/image";
+import PlatformLinkItem from "../PlatformLinkItem";
 
 type TMockupData = {
   firstName?: string;
@@ -57,28 +59,30 @@ export default function PhoneMockup({
         </foreignObject>
       )}
 
-      {data.links?.length === 0 && (
-        <>
-          <rect width="237" height="44" x="35" y="278" fill="#EEE" rx="8" />
-          <rect width="237" height="44" x="35" y="342" fill="#EEE" rx="8" />
-          <rect width="237" height="44" x="35" y="406" fill="#EEE" rx="8" />
-          <rect width="237" height="44" x="35" y="470" fill="#EEE" rx="8" />
-          <rect width="237" height="44" x="35" y="534" fill="#EEE" rx="8" />
-        </>
-      )}
-
       {!!data.links && data.links.length > 0 && (
-        <foreignObject x="35" y="278" width="237" height={220}>
-          <ul>
+        <foreignObject x="35" y="270" width="237" height={320}>
+          <ul className="space-y-6">
             {data.links.map((link, index) => {
-              return (
-                <li key={index} className="text-center">
-                  {link.platform}
-                </li>
-              );
+              return <PlatformLinkItem key={index} data={link} />;
             })}
           </ul>
         </foreignObject>
+      )}
+
+      {data.links && data.links.length === 0 && (
+        <rect width="237" height="44" x="35" y="278" fill="#EEE" rx="8" />
+      )}
+      {data.links && data.links.length <= 1 && (
+        <rect width="237" height="44" x="35" y="342" fill="#EEE" rx="8" />
+      )}
+      {data.links && data.links.length <= 2 && (
+        <rect width="237" height="44" x="35" y="406" fill="#EEE" rx="8" />
+      )}
+      {data.links && data.links.length <= 3 && (
+        <rect width="237" height="44" x="35" y="470" fill="#EEE" rx="8" />
+      )}
+      {data.links && data.links.length <= 4 && (
+        <rect width="237" height="44" x="35" y="534" fill="#EEE" rx="8" />
       )}
     </svg>
   );
