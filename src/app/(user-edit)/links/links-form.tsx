@@ -24,6 +24,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { useFieldArray, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
@@ -48,6 +49,7 @@ import IconDragAndDrop from "@/assets/images/icon-drag-and-drop.svg";
 import IconInput from "@/components/ui/icon-input";
 
 import IconLink from "@/assets/images/icon-link.svg";
+import { Input } from "@/components/ui/input";
 
 export default function LinksForm({
   form,
@@ -215,23 +217,42 @@ export default function LinksForm({
                                 <FormField
                                   control={form.control}
                                   name={`links.${idx}.url`}
-                                  render={({ field }) => (
-                                    <FormItem>
-                                      <FormLabel>Link</FormLabel>
-                                      <FormControl>
-                                        <IconInput
-                                          {...field}
-                                          placeholder={`e.g. ${platforms[0].url}/test`}
-                                          icon={
-                                            <Image
-                                              src={IconLink}
-                                              alt="Link icon"
+                                  render={({ field }) => {
+                                    const selectedPlatform = form.getValues(
+                                      `links.${idx}.platform`,
+                                    );
+                                    const platformUrl =
+                                      platforms.find(
+                                        (platform) =>
+                                          platform.id === selectedPlatform,
+                                      )?.url || "";
+
+                                    const username =
+                                      auth.currentUser?.email
+                                        ?.split("@")
+                                        .at(0) || ":username";
+
+                                    return (
+                                      <FormItem>
+                                        <FormLabel>Link</FormLabel>
+                                        <div className="relative">
+                                          <FormControl>
+                                            <Input
+                                              {...field}
+                                              placeholder={`e.g. ${platformUrl}/${username}`}
+                                              className="pl-10"
                                             />
-                                          }
-                                        />
-                                      </FormControl>
-                                    </FormItem>
-                                  )}
+                                          </FormControl>
+                                          <Image
+                                            src={IconLink}
+                                            alt="test"
+                                            className="absolute top-1/2 left-4 -translate-y-1/2"
+                                          />
+                                          <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                                        </div>
+                                      </FormItem>
+                                    );
+                                  }}
                                 />
                               </CardContent>
                             </Card>

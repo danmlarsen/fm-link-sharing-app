@@ -9,6 +9,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
@@ -64,9 +65,12 @@ export default function ProfileDetailsForm({
               render={({ field }) => (
                 <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
                   <FormLabel>First name*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" {...field} />
-                  </FormControl>
+                  <div className="relative">
+                    <FormControl>
+                      <Input placeholder="e.g. John" {...field} />
+                    </FormControl>
+                    <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                  </div>
                 </FormItem>
               )}
             />
@@ -76,9 +80,12 @@ export default function ProfileDetailsForm({
               render={({ field }) => (
                 <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
                   <FormLabel>Last name*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" {...field} />
-                  </FormControl>
+                  <div className="relative">
+                    <FormControl>
+                      <Input placeholder="e.g. Appleseed" {...field} />
+                    </FormControl>
+                    <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                  </div>
                 </FormItem>
               )}
             />
@@ -88,9 +95,16 @@ export default function ProfileDetailsForm({
               render={({ field }) => (
                 <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
                   <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" type="email" {...field} />
-                  </FormControl>
+                  <div className="relative">
+                    <FormControl>
+                      <Input
+                        placeholder="e.g. email@example.com"
+                        type="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                  </div>
                 </FormItem>
               )}
             />

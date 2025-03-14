@@ -43,7 +43,6 @@ export default function ProfileDetails({
       lastName: profileData?.lastName || "",
       email: profileData?.email || "",
     },
-    mode: "onChange",
   });
 
   async function handleSubmit(data: z.infer<typeof formSchema>) {

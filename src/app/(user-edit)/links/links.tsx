@@ -25,7 +25,6 @@ export default function Links({
     defaultValues: {
       links: profileData?.links || [],
     },
-    mode: "onChange",
   });
 
   const phoneMockupData = {

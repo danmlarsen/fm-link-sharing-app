@@ -10,7 +10,7 @@ export const linksFormSchema = z.object({
           .refine((value) =>
             platforms.map((platform) => platform.id).includes(value),
           ),
-        url: z.string().url("Please check the URL").min(1, "Can't be empty"),
+        url: z.string().min(1, "Can't be empty").url("Please check the URL"),
       })
       .superRefine((value, ctx) => {
         const selectedPlatform = platforms.find(
