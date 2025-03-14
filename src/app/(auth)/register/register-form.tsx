@@ -19,6 +19,10 @@ import { registerUser } from "./actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+import IconEmail from "@/assets/images/icon-email.svg";
+import IconPassword from "@/assets/images/icon-password.svg";
+import Image from "next/image";
+
 export default function RegisterForm() {
   const router = useRouter();
   const form = useForm<z.infer<typeof registerUserSchema>>({
@@ -53,14 +57,22 @@ export default function RegisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email address</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="e.g. alex@email.com"
-                  type="email"
-                  {...field}
+              <div className="relative">
+                <FormControl>
+                  <Input
+                    placeholder="e.g. alex@email.com"
+                    type="email"
+                    {...field}
+                    className="pl-10"
+                  />
+                </FormControl>
+                <Image
+                  src={IconEmail}
+                  alt="Email icon"
+                  className="absolute top-1/2 left-4 -translate-y-1/2"
                 />
-              </FormControl>
-              <FormMessage />
+                <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+              </div>
             </FormItem>
           )}
         />
@@ -71,14 +83,22 @@ export default function RegisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="At least 8 characters"
-                  type="password"
-                  {...field}
+              <div className="relative">
+                <FormControl>
+                  <Input
+                    placeholder="At least 8 characters"
+                    type="password"
+                    {...field}
+                    className="pl-10"
+                  />
+                </FormControl>
+                <Image
+                  src={IconPassword}
+                  alt="Lock icon"
+                  className="absolute top-1/2 left-4 -translate-y-1/2"
                 />
-              </FormControl>
-              <FormMessage />
+                <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+              </div>
             </FormItem>
           )}
         />
@@ -89,14 +109,22 @@ export default function RegisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Confirm password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="At least 8 characters"
-                  type="password"
-                  {...field}
+              <div className="relative">
+                <FormControl>
+                  <Input
+                    placeholder="At least 8 characters"
+                    type="password"
+                    {...field}
+                    className="pl-10"
+                  />
+                </FormControl>
+                <Image
+                  src={IconPassword}
+                  alt="Lock icon"
+                  className="absolute top-1/2 left-4 -translate-y-1/2"
                 />
-              </FormControl>
-              <FormMessage />
+                <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+              </div>
             </FormItem>
           )}
         />

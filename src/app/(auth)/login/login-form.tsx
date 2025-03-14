@@ -19,9 +19,13 @@ import { useAuth } from "@/context/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import IconEmail from "@/assets/images/icon-email.svg";
+import IconPassword from "@/assets/images/icon-password.svg";
+import Image from "next/image";
+
 const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string().min(1, "Cant be empty").email(),
+  password: z.string().min(8, "Please check again"),
 });
 
 export default function LoginForm() {
@@ -59,13 +63,22 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email address</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="e.g. alex@email.com"
-                  type="email"
-                  {...field}
+              <div className="relative">
+                <FormControl>
+                  <Input
+                    placeholder="e.g. alex@email.com"
+                    type="email"
+                    {...field}
+                    className="pl-10"
+                  />
+                </FormControl>
+                <Image
+                  src={IconEmail}
+                  alt="Email icon"
+                  className="absolute top-1/2 left-4 -translate-y-1/2"
                 />
-              </FormControl>
+                <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+              </div>
             </FormItem>
           )}
         />
@@ -76,13 +89,22 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter your password"
-                  type="password"
-                  {...field}
+              <div className="relative">
+                <FormControl>
+                  <Input
+                    placeholder="Enter your password"
+                    type="password"
+                    {...field}
+                    className="pl-10"
+                  />
+                </FormControl>
+                <Image
+                  src={IconPassword}
+                  alt="Lock icon"
+                  className="absolute top-1/2 left-4 -translate-y-1/2"
                 />
-              </FormControl>
+                <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+              </div>
             </FormItem>
           )}
         />
