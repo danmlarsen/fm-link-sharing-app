@@ -227,11 +227,6 @@ export default function LinksForm({
                                           platform.id === selectedPlatform,
                                       )?.url || "";
 
-                                    const username =
-                                      auth.currentUser?.email
-                                        ?.split("@")
-                                        .at(0) || ":username";
-
                                     return (
                                       <FormItem>
                                         <FormLabel>Link</FormLabel>
@@ -239,7 +234,7 @@ export default function LinksForm({
                                           <FormControl>
                                             <Input
                                               {...field}
-                                              placeholder={`e.g. ${platformUrl}/${username}`}
+                                              placeholder={`e.g. ${platformUrl}/johnappleseed`}
                                               className="pl-10"
                                             />
                                           </FormControl>
