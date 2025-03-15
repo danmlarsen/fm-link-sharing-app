@@ -69,8 +69,9 @@ export default function ProfileDetailsForm({
                     <FormControl>
                       <Input placeholder="e.g. John" {...field} />
                     </FormControl>
-                    <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                    <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
                   </div>
+                  <FormMessage className="md:hidden" />
                 </FormItem>
               )}
             />
@@ -84,8 +85,9 @@ export default function ProfileDetailsForm({
                     <FormControl>
                       <Input placeholder="e.g. Appleseed" {...field} />
                     </FormControl>
-                    <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                    <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
                   </div>
+                  <FormMessage className="md:hidden" />
                 </FormItem>
               )}
             />
@@ -103,8 +105,9 @@ export default function ProfileDetailsForm({
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                    <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
                   </div>
+                  <FormMessage className="md:hidden" />
                 </FormItem>
               )}
             />

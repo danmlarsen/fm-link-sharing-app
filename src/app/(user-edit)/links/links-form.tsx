@@ -243,8 +243,9 @@ export default function LinksForm({
                                             alt="test"
                                             className="absolute top-1/2 left-4 -translate-y-1/2"
                                           />
-                                          <FormMessage className="absolute top-1/2 right-4 -translate-y-1/2" />
+                                          <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
                                         </div>
+                                        <FormMessage className="md:hidden" />
                                       </FormItem>
                                     );
                                   }}
