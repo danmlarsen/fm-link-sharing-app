@@ -39,7 +39,6 @@ import {
 
 import { platforms } from "@/data/platforms";
 import { linksFormSchema } from "@/validation/profile";
-import { TLink } from "@/types/profile";
 import { saveLinks } from "./actions";
 import { useAuth } from "@/context/auth";
 
@@ -47,7 +46,6 @@ import { toast } from "sonner";
 
 import IconSaved from "@/assets/images/icon-changes-saved.svg";
 import IconDragAndDrop from "@/assets/images/icon-drag-and-drop.svg";
-import IconInput from "@/components/ui/icon-input";
 
 import IconLink from "@/assets/images/icon-link.svg";
 import { Input } from "@/components/ui/input";
@@ -94,6 +92,20 @@ export default function LinksForm({
     );
   }
 
+  function handleAddLink() {
+    const selectedPlatforms = linkFields.map((field) => field.platform);
+    const availablePlatforms = platforms.filter(
+      (platform) => !selectedPlatforms.includes(platform.id),
+    );
+
+    if (availablePlatforms.length === 0) {
+      toast.error("No more available platforms");
+      return;
+    }
+
+    append({ platform: availablePlatforms[0].id, url: "" });
+  }
+
   function handleDragEnd(result: DropResult) {
     if (!result.destination) return;
 
@@ -108,11 +120,7 @@ export default function LinksForm({
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-3">
         <div className="space-y-6">
           <div className="flex flex-col">
-            <Button
-              variant="outline"
-              type="button"
-              onClick={() => append({ platform: platforms[0].id, url: "" })}
-            >
+            <Button variant="outline" type="button" onClick={handleAddLink}>
               + Add new link
             </Button>
           </div>
@@ -208,6 +216,13 @@ export default function LinksForm({
                                                 <SelectItem
                                                   value={platform.id}
                                                   className="py-3"
+                                                  disabled={
+                                                    !!linkFields.find(
+                                                      (field) =>
+                                                        field.platform ===
+                                                        platform.id,
+                                                    )
+                                                  }
                                                 >
                                                   <div
                                                     className={cn(
