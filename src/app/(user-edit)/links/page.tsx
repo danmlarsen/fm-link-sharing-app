@@ -1,13 +1,3 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import LinksForm from "./links-form";
 import { getProfile } from "@/data/profile";
 import { cookies } from "next/headers";
 import { auth } from "@/firebase/server";

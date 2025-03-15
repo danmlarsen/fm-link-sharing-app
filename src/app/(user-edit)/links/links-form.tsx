@@ -15,6 +15,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -51,6 +52,7 @@ import IconInput from "@/components/ui/icon-input";
 import IconLink from "@/assets/images/icon-link.svg";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Fragment } from "react";
 
 export default function LinksForm({
   form,
@@ -158,16 +160,15 @@ export default function LinksForm({
                             <Card className="bg-accent">
                               <CardHeader className="flex-row justify-between">
                                 <div className="flex items-center gap-2">
-                                  <button
-                                    className="h-6"
-                                    type="button"
+                                  <div
+                                    className="flex h-6 items-center"
                                     {...provided.dragHandleProps}
                                   >
                                     <Image
                                       src={IconDragAndDrop}
                                       alt="Drag and drop icon"
                                     />
-                                  </button>
+                                  </div>
                                   <span className="font-bold">
                                     Link #{idx + 1}
                                   </span>
@@ -198,36 +199,42 @@ export default function LinksForm({
                                             <SelectValue />
                                           </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent className="group">
-                                          {platforms.map((platform) => {
+                                        <SelectContent className="group px-4 py-3">
+                                          {platforms.map((platform, index) => {
                                             const Icon = platform.icon;
 
                                             return (
-                                              <SelectItem
-                                                key={platform.id}
-                                                value={platform.id}
-                                              >
-                                                <div
-                                                  className={cn(
-                                                    "flex items-center gap-3",
-                                                    field.value ===
-                                                      platform.id &&
-                                                      "group-data-[state=open]:text-primary",
-                                                  )}
+                                              <Fragment key={platform.id}>
+                                                <SelectItem
+                                                  value={platform.id}
+                                                  className="py-3"
                                                 >
-                                                  <div>
-                                                    <Icon
-                                                      className={cn(
-                                                        "text-muted-foreground",
-                                                        field.value ===
-                                                          platform.id &&
-                                                          "group-data-[state=open]:text-primary",
-                                                      )}
-                                                    />
+                                                  <div
+                                                    className={cn(
+                                                      "flex items-center gap-3",
+                                                      field.value ===
+                                                        platform.id &&
+                                                        "group-data-[state=open]:text-primary",
+                                                    )}
+                                                  >
+                                                    <div>
+                                                      <Icon
+                                                        className={cn(
+                                                          "text-muted-foreground",
+                                                          field.value ===
+                                                            platform.id &&
+                                                            "group-data-[state=open]:text-primary",
+                                                        )}
+                                                      />
+                                                    </div>
+                                                    <div>{platform.title}</div>
                                                   </div>
-                                                  <div>{platform.title}</div>
-                                                </div>
-                                              </SelectItem>
+                                                </SelectItem>
+                                                {index + 1 <
+                                                  platforms.length && (
+                                                  <SelectSeparator />
+                                                )}
+                                              </Fragment>
                                             );
                                           })}
                                         </SelectContent>
