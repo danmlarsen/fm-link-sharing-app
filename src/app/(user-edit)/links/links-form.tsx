@@ -50,6 +50,7 @@ import IconInput from "@/components/ui/icon-input";
 
 import IconLink from "@/assets/images/icon-link.svg";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export default function LinksForm({
   form,
@@ -151,18 +152,25 @@ export default function LinksForm({
                       >
                         {(provided) => (
                           <li
-                            {...provided.dragHandleProps}
-                            {...provided.draggableProps}
                             ref={provided.innerRef}
+                            {...provided.draggableProps}
                           >
                             <Card className="bg-accent">
                               <CardHeader className="flex-row justify-between">
                                 <div className="flex items-center gap-2">
-                                  <Image
-                                    src={IconDragAndDrop}
-                                    alt="Drag and drop icon"
-                                  />
-                                  <span>Link #{idx + 1}</span>
+                                  <button
+                                    className="h-6"
+                                    type="button"
+                                    {...provided.dragHandleProps}
+                                  >
+                                    <Image
+                                      src={IconDragAndDrop}
+                                      alt="Drag and drop icon"
+                                    />
+                                  </button>
+                                  <span className="font-bold">
+                                    Link #{idx + 1}
+                                  </span>
                                 </div>
                                 <div>
                                   <Button
@@ -190,7 +198,7 @@ export default function LinksForm({
                                             <SelectValue />
                                           </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent>
+                                        <SelectContent className="group">
                                           {platforms.map((platform) => {
                                             const Icon = platform.icon;
 
@@ -199,9 +207,23 @@ export default function LinksForm({
                                                 key={platform.id}
                                                 value={platform.id}
                                               >
-                                                <div className="flex items-center gap-3">
+                                                <div
+                                                  className={cn(
+                                                    "flex items-center gap-3",
+                                                    field.value ===
+                                                      platform.id &&
+                                                      "group-data-[state=open]:text-primary",
+                                                  )}
+                                                >
                                                   <div>
-                                                    <Icon className="text-current" />
+                                                    <Icon
+                                                      className={cn(
+                                                        "text-muted-foreground",
+                                                        field.value ===
+                                                          platform.id &&
+                                                          "group-data-[state=open]:text-primary",
+                                                      )}
+                                                    />
                                                   </div>
                                                   <div>{platform.title}</div>
                                                 </div>
