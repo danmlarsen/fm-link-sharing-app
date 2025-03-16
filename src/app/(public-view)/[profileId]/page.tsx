@@ -22,7 +22,13 @@ export default async function UserLinks({
 
   const { data: profileData } = await getProfile(profileId);
 
-  if (!profileData) return notFound();
+  if (
+    !profileData ||
+    !profileData.firstName ||
+    !profileData.lastName ||
+    !profileData.links
+  )
+    return notFound();
 
   return (
     <Card className="md:bg-background mx-auto max-w-[237px] gap-0 bg-transparent text-center md:max-w-[349px] md:px-14 md:py-12">

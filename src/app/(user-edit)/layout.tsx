@@ -9,7 +9,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid min-h-screen grid-rows-[auto_1fr] gap-4">
+    <div className="grid min-h-screen grid-rows-[auto_1fr]">
       <header>
         <Card className="rounded-t-none">
           <CardContent className="flex justify-between">
@@ -22,7 +22,7 @@ export default function MainLayout({
         </Card>
       </header>
 
-      <div className="flex flex-col">{children}</div>
+      <div className="flex flex-col p-4 md:p-6">{children}</div>
     </div>
   );
 }

@@ -277,6 +277,8 @@ export default function LinksForm({
                                         <div className="relative">
                                           <FormControl>
                                             <Input
+                                              type="url"
+                                              list="defaultURLs"
                                               {...field}
                                               placeholder={`e.g. ${platformUrl}/johnappleseed`}
                                               className="pl-10"
@@ -311,6 +313,15 @@ export default function LinksForm({
         <div className="flex flex-col">
           <Button type="submit">Save</Button>
         </div>
+        <datalist id="defaultURLs">
+          {platforms.map((platform) => (
+            <option
+              key={platform.id}
+              value={`${platform.url}/`}
+              label={platform.title}
+            />
+          ))}
+        </datalist>
       </form>
     </Form>
   );

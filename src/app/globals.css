@@ -103,3 +103,7 @@
     cursor: pointer;
   }
 }
+
+@theme {
+  --breakpoint-lg: 72rem;
+}

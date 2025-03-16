@@ -102,7 +102,7 @@ export default function ProfileDetails({
   form.watch(["firstName", "lastName", "email", "avatar"]);
 
   return (
-    <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 lg:grid-cols-[auto_1fr]">
+    <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[auto_1fr]">
       <aside className="hidden w-[400px] lg:grid">
         <Card>
           <CardContent>
