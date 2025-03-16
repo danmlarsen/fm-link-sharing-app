@@ -16,7 +16,14 @@ export const linksFormSchema = z.object({
         const selectedPlatform = platforms.find(
           (platform) => platform.id === value.platform,
         );
-        if (!selectedPlatform || !value.url.startsWith(selectedPlatform.url)) {
+        const urlStrings = value.url.split("/");
+        const trailingUrlString = urlStrings[urlStrings.length - 1];
+
+        if (
+          !selectedPlatform ||
+          !value.url.startsWith(selectedPlatform.url) ||
+          !trailingUrlString
+        ) {
           ctx.addIssue({
             message: "Please check the URL",
             path: ["url"],

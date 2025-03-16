@@ -280,7 +280,7 @@ export default function LinksForm({
                                               type="url"
                                               list="defaultURLs"
                                               {...field}
-                                              placeholder={`e.g. ${platformUrl}/johnappleseed`}
+                                              placeholder={`e.g. ${platformUrl}johnappleseed`}
                                               className="pl-10"
                                             />
                                           </FormControl>
@@ -317,7 +317,7 @@ export default function LinksForm({
           {platforms.map((platform) => (
             <option
               key={platform.id}
-              value={`${platform.url}/`}
+              value={platform.url}
               label={platform.title}
             />
           ))}
