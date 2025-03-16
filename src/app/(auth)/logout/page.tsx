@@ -16,5 +16,5 @@ export default function LogoutPage() {
     logout();
   }, []);
 
-  return <div>Logging out...</div>;
+  return null;
 }

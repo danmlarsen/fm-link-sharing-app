@@ -50,91 +50,93 @@ export default function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email address</FormLabel>
-              <div className="relative">
-                <FormControl>
-                  <Input
-                    placeholder="e.g. alex@email.com"
-                    type="email"
-                    {...field}
-                    className="pl-10"
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <fieldset className="space-y-6" disabled={form.formState.isSubmitting}>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email address</FormLabel>
+                <div className="relative">
+                  <FormControl>
+                    <Input
+                      placeholder="e.g. alex@email.com"
+                      type="email"
+                      {...field}
+                      className="pl-10"
+                    />
+                  </FormControl>
+                  <Image
+                    src={IconEmail}
+                    alt="Email icon"
+                    className="absolute top-1/2 left-4 -translate-y-1/2"
                   />
-                </FormControl>
-                <Image
-                  src={IconEmail}
-                  alt="Email icon"
-                  className="absolute top-1/2 left-4 -translate-y-1/2"
-                />
-                <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
-              </div>
-              <FormMessage className="md:hidden" />
-            </FormItem>
-          )}
-        />
+                  <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
+                </div>
+                <FormMessage className="md:hidden" />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <div className="relative">
-                <FormControl>
-                  <Input
-                    placeholder="At least 8 characters"
-                    type="password"
-                    {...field}
-                    className="pl-10"
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <div className="relative">
+                  <FormControl>
+                    <Input
+                      placeholder="At least 8 characters"
+                      type="password"
+                      {...field}
+                      className="pl-10"
+                    />
+                  </FormControl>
+                  <Image
+                    src={IconPassword}
+                    alt="Lock icon"
+                    className="absolute top-1/2 left-4 -translate-y-1/2"
                   />
-                </FormControl>
-                <Image
-                  src={IconPassword}
-                  alt="Lock icon"
-                  className="absolute top-1/2 left-4 -translate-y-1/2"
-                />
-                <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
-              </div>
-              <FormMessage className="md:hidden" />
-            </FormItem>
-          )}
-        />
+                  <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
+                </div>
+                <FormMessage className="md:hidden" />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm password</FormLabel>
-              <div className="relative">
-                <FormControl>
-                  <Input
-                    placeholder="At least 8 characters"
-                    type="password"
-                    {...field}
-                    className="pl-10"
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm password</FormLabel>
+                <div className="relative">
+                  <FormControl>
+                    <Input
+                      placeholder="At least 8 characters"
+                      type="password"
+                      {...field}
+                      className="pl-10"
+                    />
+                  </FormControl>
+                  <Image
+                    src={IconPassword}
+                    alt="Lock icon"
+                    className="absolute top-1/2 left-4 -translate-y-1/2"
                   />
-                </FormControl>
-                <Image
-                  src={IconPassword}
-                  alt="Lock icon"
-                  className="absolute top-1/2 left-4 -translate-y-1/2"
-                />
-                <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
-              </div>
-              <FormMessage className="md:hidden" />
-            </FormItem>
-          )}
-        />
+                  <FormMessage className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block" />
+                </div>
+                <FormMessage className="md:hidden" />
+              </FormItem>
+            )}
+          />
 
-        <div className="flex flex-col">
-          <Button type="submit">Create new account</Button>
-        </div>
+          <div className="flex flex-col">
+            <Button type="submit">Create new account</Button>
+          </div>
+        </fieldset>
       </form>
     </Form>
   );
