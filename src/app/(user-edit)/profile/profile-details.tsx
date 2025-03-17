@@ -20,10 +20,13 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import PhoneMockup from "@/components/ui/phone-mockup";
+import { Form } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 
 export const formSchema = profileDetailsFormSchema.and(profilePictureSchema);
 
@@ -111,19 +114,26 @@ export default function ProfileDetails({
         </Card>
       </aside>
       <main className="grid">
-        <div className="mx-auto w-full">
-          <Card>
-            <CardHeader>
-              <CardTitle>Profile Details</CardTitle>
-              <CardDescription>
-                Add your details to create a personal touch to your profile.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ProfileDetailsForm form={form} handleSubmit={handleSubmit} />
-            </CardContent>
-          </Card>
-        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="grid">
+            <Card>
+              <CardHeader>
+                <CardTitle>Profile Details</CardTitle>
+                <CardDescription>
+                  Add your details to create a personal touch to your profile.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ProfileDetailsForm form={form} />
+              </CardContent>
+              <CardFooter className="mt-auto items-stretch border-t pt-4 md:items-end md:pt-6">
+                <Button type="submit" disabled={form.formState.isSubmitting}>
+                  Save
+                </Button>
+              </CardFooter>
+            </Card>
+          </form>
+        </Form>
       </main>
     </div>
   );

@@ -22,7 +22,7 @@ export default function MainLayout({
         </Card>
       </header>
 
-      <div className="flex flex-col p-4 md:p-6">{children}</div>
+      <div className="grid p-4 md:p-6">{children}</div>
     </div>
   );
 }

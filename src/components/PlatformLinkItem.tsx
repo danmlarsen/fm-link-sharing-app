@@ -25,13 +25,13 @@ export default function PlatformLinkItem({
         color: platformData.color,
       }}
       className={cn(
-        "flex h-11 flex-col justify-center rounded-md",
+        "flex flex-col justify-center rounded-md transition-opacity duration-300 hover:opacity-75",
         className,
         platformData.id === "fm" && "border border-gray-500",
       )}
     >
       <Link
-        className="flex items-center justify-between px-4"
+        className="flex h-11 items-center justify-between px-4"
         href={url ?? ""}
         target="_blank"
       >
