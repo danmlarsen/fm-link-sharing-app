@@ -42,12 +42,24 @@ export default function ProfileImageUploader({
       return;
     }
 
-    const newImageObject = {
-      id: `${Date.now()}-${file.name}`,
-      url: URL.createObjectURL(file),
-      file,
+    const img = new window.Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = () => {
+      if (img.width > 1024 || img.height > 1024) {
+        toast.error("Error", {
+          description: "Image resolution exceeded 1024x1024",
+        });
+        return;
+      }
+
+      const newImageObject = {
+        id: `${Date.now()}-${file.name}`,
+        url: img.src,
+        file,
+      };
+      onImageChange(newImageObject);
     };
-    onImageChange(newImageObject);
   }
 
   return (
