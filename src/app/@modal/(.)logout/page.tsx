@@ -27,7 +27,7 @@ export default function LogoutModal() {
       location.reload();
     }
     logout();
-  }, []);
+  }, [auth]);
 
   return (
     <Dialog open={showModal}>

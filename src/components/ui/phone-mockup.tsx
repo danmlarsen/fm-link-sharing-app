@@ -1,6 +1,5 @@
-import { platforms } from "@/data/platforms";
 import { cn } from "@/lib/utils";
-import { TLink, TProfile, TProfileDetails } from "@/types/profile";
+import { TLink } from "@/types/profile";
 import Image from "next/image";
 import PlatformLinkItem from "../PlatformLinkItem";
 
