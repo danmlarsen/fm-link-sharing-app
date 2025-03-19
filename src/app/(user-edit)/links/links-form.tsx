@@ -97,20 +97,22 @@ export default function LinksForm({
 
         {linkFields.length === 0 && (
           <Card className="bg-accent">
-            <CardHeader className="text-center">
+            <CardHeader className="gap-6 text-center md:gap-10">
               <div className="flex justify-center">
                 <Image
-                  className="w-[124px]"
+                  className="w-[7.75rem] md:w-[15.625rem]"
                   src={EmptyIllustration}
                   alt="Empty illustration"
                 />
               </div>
-              <CardTitle>Let's get you started</CardTitle>
-              <CardDescription>
-                Use the “Add new link” button to get started. Once you have more
-                than one link, you can reorder and edit them. We’re here to help
-                you share your profiles with everyone!
-              </CardDescription>
+              <div className="mx-auto flex max-w-[30.5rem] flex-col gap-6">
+                <CardTitle>Let's get you started</CardTitle>
+                <CardDescription>
+                  Use the “Add new link” button to get started. Once you have
+                  more than one link, you can reorder and edit them. We’re here
+                  to help you share your profiles with everyone!
+                </CardDescription>
+              </div>
             </CardHeader>
           </Card>
         )}
@@ -155,6 +157,7 @@ export default function LinksForm({
                                 <Button
                                   type="button"
                                   variant="ghost"
+                                  className="text-card-foreground"
                                   onClick={() => remove(idx)}
                                 >
                                   Remove

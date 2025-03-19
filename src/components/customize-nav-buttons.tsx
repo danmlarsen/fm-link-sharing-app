@@ -61,7 +61,7 @@ function NavButton({
   return (
     <Button
       className={cn(
-        "text-foreground font-semibold",
+        "text-card-foreground hover:text-primary px-[1.6875rem] font-semibold",
         pathname.startsWith(href) && "bg-muted text-primary",
       )}
       variant="ghost"

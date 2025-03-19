@@ -2,7 +2,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -21,13 +20,13 @@ export default function LoginPage() {
       </CardHeader>
       <CardContent className="md:px-10">
         <LoginForm />
+        <div className="mt-6 flex items-center justify-center gap-2 px-6 md:px-10">
+          <span>Don't have an account?</span>
+          <Button variant="ghost" asChild className="px-0">
+            <Link href="/register">Create account</Link>
+          </Button>
+        </div>
       </CardContent>
-      <CardFooter className="md:px-10">
-        <span>Don't have an account?</span>
-        <Button variant="ghost" asChild>
-          <Link href="/register">Create account</Link>
-        </Button>
-      </CardFooter>
     </Card>
   );
 }
