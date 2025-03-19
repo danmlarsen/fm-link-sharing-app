@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { getProfile } from "@/data/profile";
+import { getCachedProfile } from "@/data/profile";
 
 import { notFound } from "next/navigation";
 
@@ -20,7 +20,7 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
 
   if (!profileId) notFound();
 
-  const { data: profileData } = await getProfile(profileId);
+  const { data: profileData } = await getCachedProfile(profileId);
 
   if (
     !profileData ||
