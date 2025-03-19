@@ -20,9 +20,9 @@ export default function LoginPage() {
       </CardHeader>
       <CardContent className="md:px-10">
         <LoginForm />
-        <div className="mt-6 flex items-center justify-center gap-2 px-6 md:px-10">
+        <div className="mt-6 flex flex-col items-center justify-center px-6 md:flex-row md:gap-2 md:px-10">
           <span>Don&apos;t have an account?</span>
-          <Button variant="ghost" asChild className="px-0">
+          <Button variant="ghost" asChild className="px-0 font-normal">
             <Link href="/register">Create account</Link>
           </Button>
         </div>

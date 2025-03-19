@@ -1,4 +1,4 @@
-import { getProfile } from "@/data/profile";
+import { getCachedProfile } from "@/data/profile";
 import { cookies } from "next/headers";
 import { auth } from "@/firebase/server";
 import Links from "./links";
@@ -14,7 +14,7 @@ export default async function CustomizeLinksPage() {
   if (!verifiedToken) unauthorized();
   const userId = verifiedToken.uid;
 
-  const { data: profileData } = await getProfile(userId);
+  const { data: profileData } = await getCachedProfile(userId);
 
   return <Links profileData={profileData} />;
 }

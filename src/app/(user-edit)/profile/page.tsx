@@ -1,4 +1,4 @@
-import { getProfile } from "@/data/profile";
+import { getCachedProfile } from "@/data/profile";
 import { cookies } from "next/headers";
 import { auth } from "@/firebase/server";
 import ProfileDetails from "./profile-details";
@@ -14,7 +14,7 @@ export default async function ProfileDetailsPage() {
   if (!verifiedToken) unauthorized();
   const userId = verifiedToken.uid;
 
-  const { data: profileData } = await getProfile(userId);
+  const { data: profileData } = await getCachedProfile(userId);
 
   return <ProfileDetails profileData={profileData} />;
 }

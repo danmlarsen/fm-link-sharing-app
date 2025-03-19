@@ -37,7 +37,7 @@ export default function Logo({
       </ContextMenu>
     );
   } else {
-    return <LogoIcon />;
+    return <LogoIcon forceFullLogo={forceFullLogo} />;
   }
 }
 
