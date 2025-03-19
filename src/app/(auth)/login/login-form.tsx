@@ -24,7 +24,7 @@ import IconPassword from "@/assets/images/icon-password.svg";
 import Image from "next/image";
 
 const formSchema = z.object({
-  email: z.string().min(1, "Cant be empty").email(),
+  email: z.string().min(1, "Can&apos;t be empty").email(),
   password: z.string().min(8, "Please check again"),
 });
 

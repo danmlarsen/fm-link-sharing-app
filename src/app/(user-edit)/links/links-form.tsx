@@ -106,7 +106,7 @@ export default function LinksForm({
                 />
               </div>
               <div className="mx-auto flex max-w-[30.5rem] flex-col gap-6">
-                <CardTitle>Let's get you started</CardTitle>
+                <CardTitle>Let&apos;s get you started</CardTitle>
                 <CardDescription>
                   Use the “Add new link” button to get started. Once you have
                   more than one link, you can reorder and edit them. We’re here

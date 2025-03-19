@@ -14,7 +14,7 @@ export default function LogoutPage() {
       router.refresh();
     }
     logout();
-  }, []);
+  }, [auth, router]);
 
   return null;
 }

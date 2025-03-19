@@ -15,7 +15,7 @@ export default function RegisterPage() {
       <CardHeader className="md:px-10">
         <CardTitle>Create account</CardTitle>
         <CardDescription>
-          Let's get your started sharing your links!
+          Let&apos;s get your started sharing your links!
         </CardDescription>
       </CardHeader>
       <CardContent className="md:px-10">
