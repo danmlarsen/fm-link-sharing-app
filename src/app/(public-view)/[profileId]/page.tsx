@@ -13,6 +13,8 @@ import { notFound } from "next/navigation";
 
 import PlatformLinkItem from "@/components/PlatformLinkItem";
 
+export const dynamic = "force-static";
+
 export default async function UserLinks({ params }: { params: Promise<any> }) {
   const { profileId } = await params;
 
