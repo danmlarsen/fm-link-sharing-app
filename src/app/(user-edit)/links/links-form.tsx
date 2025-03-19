@@ -84,6 +84,7 @@ export default function LinksForm({
     const [reorderedLink] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedLink);
     form.setValue("links", items);
+    form.clearErrors();
   }
 
   return (

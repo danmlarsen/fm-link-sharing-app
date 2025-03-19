@@ -45,12 +45,12 @@ function LogoIcon({ forceFullLogo = false }: { forceFullLogo?: boolean }) {
   return (
     <>
       <Image
-        className={cn("md:hidden", forceFullLogo && "hidden")}
+        className={cn("size-8 md:hidden", forceFullLogo && "hidden")}
         src={IconLogoSmall}
         alt="Logo"
       />
       <Image
-        className={cn("hidden md:block", forceFullLogo && "block")}
+        className={cn("hidden h-8 md:block", forceFullLogo && "block")}
         src={IconLogo}
         alt="Logo"
       />

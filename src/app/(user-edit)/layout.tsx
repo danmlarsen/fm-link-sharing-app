@@ -12,7 +12,7 @@ export default function MainLayout({
     <div className="grid min-h-screen grid-rows-[auto_1fr]">
       <header>
         <Card className="rounded-t-none">
-          <CardContent className="flex justify-between">
+          <CardContent className="flex items-center justify-between">
             <Logo />
             <CustomizeNavButtons />
             <div>

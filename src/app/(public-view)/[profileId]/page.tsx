@@ -31,10 +31,10 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
     notFound();
 
   return (
-    <Card className="md:bg-background mx-auto max-w-[237px] gap-0 bg-transparent text-center md:max-w-[349px] md:px-14 md:py-12">
-      <CardHeader className="px-0">
+    <Card className="md:bg-background mx-auto max-w-[14.8125rem] gap-0 bg-transparent text-center md:max-w-[21.8125rem] md:px-14 md:py-12 md:shadow-[0_0_32px_0] md:shadow-black/10">
+      <CardHeader className="gap-0 px-0">
         <div className="flex justify-center">
-          <Avatar className="border-primary size-[108px] border-4">
+          <Avatar className="border-primary size-[6.75rem] border-4">
             <AvatarImage
               src={profileData.avatar}
               alt={`${profileData.firstName} ${profileData.lastName} profile image`}
@@ -44,10 +44,12 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
             </AvatarFallback>
           </Avatar>
         </div>
-        <CardTitle className="mt-6 text-3xl leading-relaxed">
+        <CardTitle className="mt-6 text-[2rem] leading-relaxed">
           {profileData.firstName} {profileData.lastName}
         </CardTitle>
-        <CardDescription>{profileData.email}</CardDescription>
+        <CardDescription className="mt-2 text-base">
+          {profileData.email}
+        </CardDescription>
       </CardHeader>
       <CardContent className="mt-14 px-0">
         <ul className="space-y-5">
