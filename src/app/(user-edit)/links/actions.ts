@@ -3,6 +3,7 @@
 import { auth, firestore } from "@/firebase/server";
 import { TLink } from "@/types/profile";
 import { linksFormSchema } from "@/validation/profile";
+import { revalidateTag } from "next/cache";
 
 export async function saveLinks({
   links,
@@ -29,10 +30,12 @@ export async function saveLinks({
     };
   }
 
-  firestore.collection("profiles").doc(userId).set(
+  await firestore.collection("profiles").doc(userId).set(
     {
       links,
     },
     { merge: true },
   );
+
+  revalidateTag("userData");
 }

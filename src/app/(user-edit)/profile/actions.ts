@@ -5,6 +5,7 @@ import { cloudinary } from "@/lib/cloudinary";
 import { TProfileDetails } from "@/types/profile";
 import { profileDetailsFormSchema } from "@/validation/profile";
 import { UploadApiResponse } from "cloudinary";
+import { revalidateTag } from "next/cache";
 import sharp from "sharp";
 
 export async function uploadProfilePicture(
@@ -101,7 +102,7 @@ export async function saveProfileDetails({
     };
   }
 
-  firestore
+  await firestore
     .collection("profiles")
     .doc(userId)
     .set(
@@ -110,4 +111,6 @@ export async function saveProfileDetails({
       },
       { merge: true },
     );
+
+  revalidateTag("userData");
 }

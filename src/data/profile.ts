@@ -17,5 +17,6 @@ export const getProfile = unstable_cache(
       data: { id: profileSnapshot.id, ...profileSnapshot.data() } as TProfile,
     };
   },
-  ["user"],
+  ["userData"],
+  { tags: ["userData"] },
 );
