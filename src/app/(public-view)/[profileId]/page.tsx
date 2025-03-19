@@ -13,12 +13,10 @@ import { notFound } from "next/navigation";
 
 import PlatformLinkItem from "@/components/PlatformLinkItem";
 
-export default async function UserLinks({
-  params,
-}: {
-  params: { profileId: string };
-}) {
+export default async function UserLinks({ params }: { params: Promise<any> }) {
   const { profileId } = await params;
+
+  if (!profileId) notFound();
 
   const { data: profileData } = await getProfile(profileId);
 
@@ -28,7 +26,7 @@ export default async function UserLinks({
     !profileData.lastName ||
     !profileData.links
   )
-    return notFound();
+    notFound();
 
   return (
     <Card className="md:bg-background mx-auto max-w-[237px] gap-0 bg-transparent text-center md:max-w-[349px] md:px-14 md:py-12">
