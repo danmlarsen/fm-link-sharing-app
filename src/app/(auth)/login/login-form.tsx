@@ -14,7 +14,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import ContinueWithGoogleButton from "@/components/continue-with-google-button";
 import { useAuth } from "@/context/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -22,6 +21,7 @@ import { toast } from "sonner";
 import IconEmail from "@/assets/images/icon-email.svg";
 import IconPassword from "@/assets/images/icon-password.svg";
 import Image from "next/image";
+import { Loader2Icon } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().min(1, "Can&apos;t be empty").email(),
@@ -116,12 +116,12 @@ export default function LoginForm() {
           />
 
           <div className="flex flex-col">
-            <Button type="submit">Login</Button>
-          </div>
-
-          <div className="flex flex-col">
-            {/* TODO: Used for testing auth */}
-            {!auth?.currentUser && <ContinueWithGoogleButton />}
+            <Button type="submit">
+              {!form.formState.isSubmitting && <span>Login</span>}
+              {!!form.formState.isSubmitting && (
+                <Loader2Icon className="animate-spin" />
+              )}
+            </Button>
           </div>
         </fieldset>
       </form>

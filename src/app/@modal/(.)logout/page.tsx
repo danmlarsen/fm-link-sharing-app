@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useAuth } from "@/context/auth";
+import { Loader2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function LogoutModal() {
@@ -33,8 +34,11 @@ export default function LogoutModal() {
     <Dialog open={showModal}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Logout</DialogTitle>
-          <DialogDescription>Logging out...</DialogDescription>
+          <DialogTitle>Logging out</DialogTitle>
+          <DialogDescription className="flex items-center gap-2">
+            <Loader2Icon className="animate-spin" />
+            Please wait...
+          </DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>

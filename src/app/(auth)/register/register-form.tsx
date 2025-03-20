@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import IconEmail from "@/assets/images/icon-email.svg";
 import IconPassword from "@/assets/images/icon-password.svg";
 import Image from "next/image";
+import { Loader2Icon } from "lucide-react";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -134,7 +135,12 @@ export default function RegisterForm() {
           />
 
           <div className="flex flex-col">
-            <Button type="submit">Create new account</Button>
+            <Button type="submit">
+              {!form.formState.isSubmitting && <span>Create new account</span>}
+              {!!form.formState.isSubmitting && (
+                <Loader2Icon className="animate-spin" />
+              )}
+            </Button>
           </div>
         </fieldset>
       </form>

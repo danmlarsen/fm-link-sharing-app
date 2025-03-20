@@ -50,10 +50,12 @@ export default function PhoneMockup({
         </>
       )}
       {!!data?.firstName && !!data?.lastName && (
-        <foreignObject width="160" height="50" x="73.5" y="185">
+        <foreignObject width="220" height="80" x="43.5" y="185">
           <div className="text-center">
-            <p>{`${data.firstName} ${data.lastName}`}</p>
-            {!!data.email && <p>{data.email}</p>}
+            <p className="break-all">
+              {[data.firstName, data.lastName].join(" ").slice(0, 60)}
+            </p>
+            {!!data.email && <p>{data.email.slice(0, 30)}</p>}
           </div>
         </foreignObject>
       )}

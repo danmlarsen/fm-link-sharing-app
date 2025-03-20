@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   FormControl,
@@ -32,7 +31,7 @@ export default function ProfileDetailsForm({
             control={form.control}
             name="avatar"
             render={({ field }) => (
-              <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
+              <FormItem className="md:grid md:grid-cols-[15rem_1fr] md:items-center">
                 <FormLabel>Profile picture</FormLabel>
                 <div className="flex flex-col gap-6 md:flex-row md:items-center">
                   <FormControl>
@@ -59,7 +58,7 @@ export default function ProfileDetailsForm({
             control={form.control}
             name="firstName"
             render={({ field }) => (
-              <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
+              <FormItem className="md:grid md:grid-cols-[15rem_1fr] md:items-center">
                 <FormLabel>First name*</FormLabel>
                 <div className="relative">
                   <FormControl>
@@ -75,7 +74,7 @@ export default function ProfileDetailsForm({
             control={form.control}
             name="lastName"
             render={({ field }) => (
-              <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
+              <FormItem className="md:grid md:grid-cols-[15rem_1fr] md:items-center">
                 <FormLabel>Last name*</FormLabel>
                 <div className="relative">
                   <FormControl>
@@ -91,7 +90,7 @@ export default function ProfileDetailsForm({
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="md:grid md:grid-cols-[240px_1fr] md:items-center">
+              <FormItem className="md:grid md:grid-cols-[15rem_1fr] md:items-center">
                 <FormLabel>Email</FormLabel>
                 <div className="relative">
                   <FormControl>

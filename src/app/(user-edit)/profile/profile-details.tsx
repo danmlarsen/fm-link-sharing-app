@@ -27,6 +27,7 @@ import {
 import PhoneMockup from "@/components/ui/phone-mockup";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { Loader2Icon } from "lucide-react";
 
 export const formSchema = profileDetailsFormSchema.and(profilePictureSchema);
 
@@ -128,7 +129,10 @@ export default function ProfileDetails({
               </CardContent>
               <CardFooter className="mt-auto items-stretch border-t pt-4 md:items-end md:pt-6">
                 <Button type="submit" disabled={form.formState.isSubmitting}>
-                  Save
+                  {!form.formState.isSubmitting && <span>Save</span>}
+                  {!!form.formState.isSubmitting && (
+                    <Loader2Icon className="animate-spin" />
+                  )}
                 </Button>
               </CardFooter>
             </Card>

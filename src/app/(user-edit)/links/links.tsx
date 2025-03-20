@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import IconSaved from "@/assets/images/icon-changes-saved.svg";
 import { Button } from "@/components/ui/button";
+import { Loader2Icon } from "lucide-react";
 
 export default function Links({
   profileData,
@@ -93,7 +94,10 @@ export default function Links({
               </CardContent>
               <CardFooter className="mt-auto items-stretch border-t pt-4 md:items-end md:pt-6">
                 <Button type="submit" disabled={form.formState.isSubmitting}>
-                  Save
+                  {!form.formState.isSubmitting && <span>Save</span>}
+                  {!!form.formState.isSubmitting && (
+                    <Loader2Icon className="animate-spin" />
+                  )}
                 </Button>
               </CardFooter>
             </Card>
