@@ -138,8 +138,8 @@ export default function LinksForm({
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                         >
-                          <Card className="bg-accent">
-                            <CardHeader className="flex-row justify-between">
+                          <Card className="bg-accent gap-2 py-5">
+                            <CardHeader className="flex-row justify-between px-5">
                               <div className="flex items-center">
                                 <div
                                   className="flex h-6 items-center pr-2"
@@ -165,7 +165,7 @@ export default function LinksForm({
                                 </Button>
                               </div>
                             </CardHeader>
-                            <CardContent className="space-y-3">
+                            <CardContent className="space-y-3 px-5">
                               <FormField
                                 control={form.control}
                                 name={`links.${idx}.platform`}

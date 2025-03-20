@@ -70,7 +70,7 @@ export default function Links({
 
   return (
     <div className="mx-auto grid w-full max-w-7xl gap-6 lg:grid-cols-[auto_1fr]">
-      <aside className="hidden w-[400px] lg:grid">
+      <aside className="hidden w-[25rem] lg:grid">
         <Card>
           <CardContent>
             <PhoneMockup data={phoneMockupData} />
