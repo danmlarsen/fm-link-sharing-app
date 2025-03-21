@@ -10,7 +10,10 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Link Sharing App",
+  title: {
+    template: "%s / Link Sharing App",
+    default: "Link Sharing App",
+  },
   description: "Developed by danmarius.no",
 };
 

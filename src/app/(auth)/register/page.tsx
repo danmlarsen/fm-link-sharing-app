@@ -8,6 +8,11 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import RegisterForm from "./register-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create account",
+};
 
 export default function RegisterPage() {
   return (

@@ -3,6 +3,11 @@ import { cookies } from "next/headers";
 import { auth } from "@/firebase/server";
 import ProfileDetails from "./profile-details";
 import { unauthorized } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile details",
+};
 
 export default async function ProfileDetailsPage() {
   const cookieStore = await cookies();

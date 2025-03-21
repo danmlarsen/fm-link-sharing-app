@@ -12,8 +12,13 @@ import { getCachedProfile } from "@/data/profile";
 import { notFound } from "next/navigation";
 
 import PlatformLinkItem from "@/components/PlatformLinkItem";
+import { Metadata } from "next";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "Link card preview",
+};
 
 export default async function UserLinks({ params }: { params: Promise<any> }) {
   const { profileId } = await params;

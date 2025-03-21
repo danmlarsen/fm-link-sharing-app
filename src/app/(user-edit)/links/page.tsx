@@ -3,6 +3,11 @@ import { cookies } from "next/headers";
 import { auth } from "@/firebase/server";
 import Links from "./links";
 import { unauthorized } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Customize links",
+};
 
 export default async function CustomizeLinksPage() {
   const cookieStore = await cookies();
