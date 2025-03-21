@@ -37,7 +37,7 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
     <Card className="md:bg-background mx-auto max-w-[14.8125rem] gap-0 bg-transparent text-center md:max-w-lg md:min-w-[21.8125rem] md:px-14 md:py-12 md:shadow-[0_0_32px_0] md:shadow-black/10">
       <CardHeader className="gap-0 px-0">
         <div className="flex justify-center">
-          <Avatar className="border-primary size-[6.75rem] border-4">
+          <Avatar className="border-primary size-32 border-4">
             <AvatarImage
               src={profileData?.avatar}
               alt={`${firstName} ${lastName} profile image`}

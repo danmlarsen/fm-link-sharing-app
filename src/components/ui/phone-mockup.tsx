@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { TLink } from "@/types/profile";
 import Image from "next/image";
 import PlatformLinkItem from "../PlatformLinkItem";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
 type TMockupData = {
   firstName?: string;
@@ -39,7 +40,9 @@ export default function PhoneMockup({
       {!data?.avatar && <circle cx="153.5" cy="112" r="48" fill="#EEE" />}
       {!!data?.avatar && (
         <foreignObject x="105.5" y="64" width={96} height={96}>
-          <Image src={data.avatar} alt="" width={96} height={96} />
+          <Avatar className="border-primary size-24 border-4">
+            <AvatarImage src={data?.avatar} alt="Profile image" />
+          </Avatar>
         </foreignObject>
       )}
 
