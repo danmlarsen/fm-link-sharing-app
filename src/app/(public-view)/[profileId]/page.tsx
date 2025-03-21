@@ -47,8 +47,9 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
             </AvatarFallback>
           </Avatar>
         </div>
-        <CardTitle className="mt-6 text-[2rem] leading-relaxed break-all">
-          {firstName} {lastName}
+        <CardTitle className="mt-6 text-[2rem] leading-relaxed">
+          <span className="break-words">{firstName}</span>{" "}
+          <span className="break-words">{lastName}</span>
         </CardTitle>
         {!!profileData?.email && (
           <CardDescription className="mt-2 text-base">
