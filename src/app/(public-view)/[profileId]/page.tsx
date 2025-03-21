@@ -27,7 +27,7 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
 
   const { data: profileData } = await getCachedProfile(profileId);
 
-  if (!profileData) notFound();
+  // if (!profileData) notFound();
 
   const firstName = profileData?.firstName || "John";
   const lastName = profileData?.lastName || "Apple";
@@ -58,15 +58,18 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
         )}
       </CardHeader>
       <CardContent className="mt-14 px-0">
-        <ul className="space-y-5">
-          {links.map((link) => (
-            <PlatformLinkItem
-              key={link.platform}
-              data={link}
-              className="h-14"
-            />
-          ))}
-        </ul>
+        {links.length === 0 && <p>I have not added any links yet 🥲</p>}
+        {links.length > 0 && (
+          <ul className="space-y-5">
+            {links.map((link) => (
+              <PlatformLinkItem
+                key={link.platform}
+                data={link}
+                className="h-14"
+              />
+            ))}
+          </ul>
+        )}
       </CardContent>
     </Card>
   );

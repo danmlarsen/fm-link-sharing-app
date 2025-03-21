@@ -5,9 +5,8 @@ export default function ProfileNotFoundPage() {
     <Card className="mx-auto max-w-md">
       <CardContent>
         <h1 className="text-foreground text-2xl font-semibold">
-          Profile could not be found.
+          Profile could not be found
         </h1>
-        <p>Please check your url and make sure the required data is saved</p>
       </CardContent>
     </Card>
   );
