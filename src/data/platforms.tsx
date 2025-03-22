@@ -18,7 +18,8 @@ export const platforms = [
   {
     id: "github",
     title: "GitHub",
-    url: "https://www.github.com/",
+    hostname: "github.com",
+    path: "/",
     backgroundColor: "#1A1A1A",
     color: "#FFFFFF",
     icon: IconGithub,
@@ -26,7 +27,8 @@ export const platforms = [
   {
     id: "youtube",
     title: "YouTube",
-    url: "https://www.youtube.com/c/",
+    hostname: "youtube.com",
+    path: "/c/",
     backgroundColor: "#EE3939",
     color: "#FFFFFF",
     icon: IconYoutube,
@@ -34,7 +36,8 @@ export const platforms = [
   {
     id: "fm",
     title: "Frontend Mentor",
-    url: "https://www.frontendmentor.io/profile/",
+    hostname: "frontendmentor.io",
+    path: "/profile/",
     backgroundColor: "#FFFFFF",
     color: "#000000",
     icon: IconFrontendMentor,
@@ -42,7 +45,8 @@ export const platforms = [
   {
     id: "twitter",
     title: "Twitter",
-    url: "https://www.twitter.com/",
+    hostname: "twitter.com",
+    path: "/",
     backgroundColor: "#1DA1F2",
     color: "#FFFFFF",
     icon: IconTwitter,
@@ -50,7 +54,8 @@ export const platforms = [
   {
     id: "linkedin",
     title: "LinkedIn",
-    url: "https://www.linkedin.com/in/",
+    hostname: "linkedin.com",
+    path: "/in/",
     backgroundColor: "#0077B5",
     color: "#FFFFFF",
     icon: IconLinkedIn,
@@ -58,7 +63,8 @@ export const platforms = [
   {
     id: "facebook",
     title: "Facebook",
-    url: "https://www.facebook.com/",
+    hostname: "facebook.com",
+    path: "/",
     backgroundColor: "#1877F2",
     color: "#FFFFFF",
     icon: IconFacebook,
@@ -66,7 +72,8 @@ export const platforms = [
   {
     id: "twitch",
     title: "Twitch",
-    url: "https://www.twitch.tv/",
+    hostname: "twitch.tv",
+    path: "/",
     backgroundColor: "#9146FF",
     color: "#FFFFFF",
     icon: IconTwitch,
@@ -74,7 +81,8 @@ export const platforms = [
   {
     id: "devto",
     title: "DEV.to",
-    url: "https://dev.to/",
+    hostname: "dev.to",
+    path: "/",
     backgroundColor: "#0A0A0A",
     color: "#FFFFFF",
     icon: IconDevto,
@@ -82,7 +90,8 @@ export const platforms = [
   {
     id: "codewars",
     title: "Codewars",
-    url: "https://www.codewars.com/users/",
+    hostname: "codewars.com",
+    path: "/users/",
     backgroundColor: "#AD2C27",
     color: "#FFFFFF",
     icon: IconCodewars,
@@ -90,7 +99,8 @@ export const platforms = [
   {
     id: "freecodecamp",
     title: "freeCodeCamp",
-    url: "https://www.freecodecamp.org/",
+    hostname: "freecodecamp.org",
+    path: "/",
     backgroundColor: "#006400",
     color: "#FFFFFF",
     icon: IconFreeCodeCamp,
@@ -98,7 +108,8 @@ export const platforms = [
   {
     id: "gitlab",
     title: "GitLab",
-    url: "https://gitlab.com/",
+    hostname: "gitlab.com",
+    path: "/",
     backgroundColor: "#FC6D26",
     color: "#FFFFFF",
     icon: IconGitLab,
@@ -106,7 +117,8 @@ export const platforms = [
   {
     id: "hashnode",
     title: "Hashnode",
-    url: "https://hashnode.com/@",
+    hostname: "hashnode.com",
+    path: "/@",
     backgroundColor: "#2962FF",
     color: "#FFFFFF",
     icon: IconHashnode,
@@ -114,7 +126,8 @@ export const platforms = [
   {
     id: "stackoverflow",
     title: "Stack Overflow",
-    url: "https://stackoverflow.com/users/",
+    hostname: "stackoverflow.com",
+    path: "/users/",
     backgroundColor: "#F48024",
     color: "#FFFFFF",
     icon: IconStackOverflow,

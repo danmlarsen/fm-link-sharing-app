@@ -16,14 +16,27 @@ export const linksFormSchema = z.object({
         const selectedPlatform = platforms.find(
           (platform) => platform.id === value.platform,
         );
-        const urlStrings = value.url.split("/");
-        const trailingUrlString = urlStrings[urlStrings.length - 1];
 
-        if (
-          !selectedPlatform ||
-          !value.url.startsWith(selectedPlatform.url) ||
-          !trailingUrlString
-        ) {
+        if (!selectedPlatform) {
+          ctx.addIssue({
+            message: "Please check the URL",
+            path: ["url"],
+            code: "custom",
+          });
+          return;
+        }
+
+        try {
+          const parsedUrl = new URL(value.url);
+          if (parsedUrl.protocol !== "https:") throw new Error();
+          if (!parsedUrl.hostname.includes(selectedPlatform.hostname))
+            throw new Error();
+          if (
+            !parsedUrl.pathname.includes(selectedPlatform.path) ||
+            parsedUrl.pathname.length <= selectedPlatform.path.length
+          )
+            throw new Error();
+        } catch {
           ctx.addIssue({
             message: "Please check the URL",
             path: ["url"],

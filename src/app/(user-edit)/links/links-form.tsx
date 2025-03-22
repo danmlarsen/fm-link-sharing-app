@@ -238,11 +238,13 @@ export default function LinksForm({
                                   const selectedPlatform = form.getValues(
                                     `links.${idx}.platform`,
                                   );
-                                  const platformUrl =
+                                  const platform =
                                     platforms.find(
                                       (platform) =>
                                         platform.id === selectedPlatform,
-                                    )?.url || "";
+                                    ) || platforms[0];
+
+                                  const fullUrl = `https://${platform.hostname}${platform.path}johnappleseed`;
 
                                   return (
                                     <FormItem>
@@ -253,7 +255,7 @@ export default function LinksForm({
                                             type="url"
                                             list="defaultURLs"
                                             {...field}
-                                            placeholder={`e.g. ${platformUrl}johnappleseed`}
+                                            placeholder={`e.g. ${fullUrl}`}
                                             className="pl-10"
                                           />
                                         </FormControl>
@@ -287,7 +289,7 @@ export default function LinksForm({
         {platforms.map((platform) => (
           <option
             key={platform.id}
-            value={platform.url}
+            value={`https://${platform.hostname}${platform.path}`}
             label={platform.title}
           />
         ))}
