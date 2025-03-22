@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 export default function PlatformLinkItem({
   className,
   data,
+  disabled = false,
 }: {
   className?: string;
   data: { platform: string; url?: string };
+  disabled?: boolean;
 }) {
   const { platform, url } = data;
 
@@ -26,12 +28,16 @@ export default function PlatformLinkItem({
       }}
       className={cn(
         "flex flex-col justify-center rounded-md transition-opacity duration-300 hover:opacity-75",
+        disabled && "transition-none hover:opacity-100",
         className,
         platformData.id === "fm" && "border border-gray-500",
       )}
     >
       <Link
-        className="flex h-11 items-center justify-between px-4"
+        className={cn(
+          "flex h-11 items-center justify-between px-4",
+          disabled && "pointer-events-none",
+        )}
         href={url ?? ""}
         target="_blank"
       >

@@ -67,7 +67,7 @@ export default function PhoneMockup({
         <foreignObject x="35" y="270" width="237" height={320}>
           <ul className="space-y-6">
             {data.links.map((link, index) => {
-              return <PlatformLinkItem key={index} data={link} />;
+              return <PlatformLinkItem key={index} data={link} disabled />;
             })}
           </ul>
         </foreignObject>

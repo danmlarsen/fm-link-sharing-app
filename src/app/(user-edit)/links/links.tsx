@@ -80,7 +80,11 @@ export default function Links({
       </aside>
       <main className="grid">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="grid">
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="grid"
+            noValidate
+          >
             <Card>
               <CardHeader>
                 <CardTitle>Customize your links</CardTitle>
