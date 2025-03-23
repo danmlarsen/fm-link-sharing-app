@@ -28,7 +28,7 @@ export const platforms = [
     id: "youtube",
     title: "YouTube",
     hostname: "youtube.com",
-    path: "/c/",
+    path: "/",
     backgroundColor: "#EE3939",
     color: "#FFFFFF",
     icon: IconYoutube,
