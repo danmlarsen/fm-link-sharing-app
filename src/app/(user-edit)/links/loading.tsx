@@ -14,7 +14,7 @@ export default function Loading() {
       <aside className="hidden w-[25rem] lg:grid">
         <Card>
           <CardContent>
-            <PhoneMockup data={{}} />
+            <PhoneMockup />
           </CardContent>
         </Card>
       </aside>

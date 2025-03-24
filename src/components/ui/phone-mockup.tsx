@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import { TLink } from "@/types/profile";
-import Image from "next/image";
+
 import PlatformLinkItem from "../PlatformLinkItem";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { Avatar, AvatarImage } from "./avatar";
 
 type TMockupData = {
   firstName?: string;

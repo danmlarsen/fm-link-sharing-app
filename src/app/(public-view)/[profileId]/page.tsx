@@ -27,8 +27,6 @@ export default async function UserLinks({ params }: { params: Promise<any> }) {
 
   const { data: profileData } = await getCachedProfile(profileId);
 
-  // if (!profileData) notFound();
-
   const firstName = profileData?.firstName || "John";
   const lastName = profileData?.lastName || "Apple";
   const links = profileData?.links || [];
