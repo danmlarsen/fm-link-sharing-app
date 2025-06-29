@@ -24,7 +24,7 @@ import Image from "next/image";
 import { Loader2Icon } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.string().min(1, "Can&apos;t be empty").email(),
+  email: z.string().min(1, "Can't be empty").email(),
   password: z.string().min(8, "Please check again"),
 });
 
